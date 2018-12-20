@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimary">#0a3665</color>
+    <color name="colorPrimaryDark">#0a3665</color>
     <color name="colorAccent">#D81B60</color>
+
+
+    <!-- Navigation Menu -->
+    <color name="bg_nav_menu_header">#0a3665</color>
+
+
+
+    <!-- transparent colors -->
+    <color name="transparent">#00000000</color>
+    <color name="trans_black_100">#FF000000</color>
+    <color name="trans_black_75">#BF000000</color>
+    <color name="trans_black_50">#80000000</color>
+    <color name="trans_black_25">#4F000000</color>
+    <color name="trans_black_15">#26000000</color>
+    <color name="black_overlay">#66000000</color>
+    <color name="white_menubar_text">#80FFFFFF</color>
+
 </resources>
