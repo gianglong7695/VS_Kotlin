@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
+import android.widget.Toast
 import com.vtv.sports.R
 import com.vtv.sports.databinding.ActivityMainBinding
 import com.vtv.sports.util.Constant
@@ -50,6 +51,9 @@ class MainActivity : AppCompatActivity() {
         for (i in 0..tabLayout.tabCount){
             tabLayout.getTabAt(i)?.setCustomView(pagerAdapter.getTabView(i))
         }
+
+
+        Toast.makeText(this, "ahihi", Toast.LENGTH_SHORT).show()
 
     }
 
