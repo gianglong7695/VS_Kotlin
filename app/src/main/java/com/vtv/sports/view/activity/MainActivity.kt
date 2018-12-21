@@ -2,10 +2,13 @@ package com.vtv.sports.view.activity
 
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.design.widget.TabLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import com.vtv.sports.R
 import com.vtv.sports.databinding.ActivityMainBinding
+import com.vtv.sports.util.Constant
+import com.vtv.sports.view.adapter.PagerMainAdapter
 import kotlinx.android.synthetic.main.layout_content_main.view.*
 
 /**
@@ -17,7 +20,7 @@ import kotlinx.android.synthetic.main.layout_content_main.view.*
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var drawerToggle:ActionBarDrawerToggle
+    private lateinit var drawerToggle: ActionBarDrawerToggle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,11 +28,30 @@ class MainActivity : AppCompatActivity() {
         init()
     }
 
-    fun init(){
+    private fun init() {
         setSupportActionBar(binding.layoutContent.toolbar_main)
         supportActionBar?.setHomeButtonEnabled(true)
-        drawerToggle = ActionBarDrawerToggle(this, binding.drawerLayout, binding.layoutContent.toolbar_main, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawerToggle = ActionBarDrawerToggle(
+                this,
+                binding.drawerLayout,
+                binding.layoutContent.toolbar_main,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close)
         binding.drawerLayout.addDrawerListener(drawerToggle)
         drawerToggle.syncState()
+
+        var pagerMain = binding.layoutContent.pager_main
+        var pagerAdapter = PagerMainAdapter(supportFragmentManager, this)
+        var tabLayout = binding.layoutContent.tablayout_main
+
+        pagerMain.adapter = pagerAdapter
+        tabLayout.setupWithViewPager(pagerMain)
+
+        for (i in 0..tabLayout.tabCount){
+            tabLayout.getTabAt(i)?.setCustomView(pagerAdapter.getTabView(i))
+        }
+
     }
+
+
 }

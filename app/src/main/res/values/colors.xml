@@ -5,8 +5,9 @@
     <color name="colorAccent">#D81B60</color>
 
 
-    <!-- Navigation Menu -->
+    <!-- Main -->
     <color name="bg_nav_menu_header">#0a3665</color>
+    <color name="bg_tablayout">#0a3665</color>
 
 
 
