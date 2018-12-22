@@ -1,6 +1,7 @@
 package com.vtv.sports.view.adapter
 
 import android.content.Context
+import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
@@ -65,4 +66,18 @@ class PagerMainAdapter(fm: FragmentManager?, context: Context?) : FragmentStateP
 
         return view
     }
+
+    fun setTabState(tabLayout: TabLayout, pos: Int, isSelected: Boolean) {
+        var view = tabLayout.getTabAt(pos)!!.customView
+        var textName = view!!.findViewById(R.id.text_tab_name) as TextView
+        var icon = view.findViewById(R.id.img_tab_icon) as ImageView
+        if(isSelected){
+            textName.setTextColor(ContextCompat.getColor(context!!, R.color.white))
+            icon.setImageResource(Constant.arrTabIconsSelected[pos])
+        }else {
+            textName.setTextColor(ContextCompat.getColor(context!!, R.color.white_menubar_text))
+            icon.setImageResource(Constant.arrTabIconsDefault[pos])
+        }
+    }
+
 }

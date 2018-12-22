@@ -5,10 +5,8 @@ import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
-import android.widget.Toast
 import com.vtv.sports.R
 import com.vtv.sports.databinding.ActivityMainBinding
-import com.vtv.sports.util.Constant
 import com.vtv.sports.view.adapter.PagerMainAdapter
 import kotlinx.android.synthetic.main.layout_content_main.view.*
 
@@ -33,11 +31,12 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.layoutContent.toolbar_main)
         supportActionBar?.setHomeButtonEnabled(true)
         drawerToggle = ActionBarDrawerToggle(
-                this,
-                binding.drawerLayout,
-                binding.layoutContent.toolbar_main,
-                R.string.navigation_drawer_open,
-                R.string.navigation_drawer_close)
+            this,
+            binding.drawerLayout,
+            binding.layoutContent.toolbar_main,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
+        )
         binding.drawerLayout.addDrawerListener(drawerToggle)
         drawerToggle.syncState()
 
@@ -48,12 +47,25 @@ class MainActivity : AppCompatActivity() {
         pagerMain.adapter = pagerAdapter
         tabLayout.setupWithViewPager(pagerMain)
 
-        for (i in 0..tabLayout.tabCount){
-            tabLayout.getTabAt(i)?.setCustomView(pagerAdapter.getTabView(i))
+        for (i in 0..tabLayout.tabCount) {
+            tabLayout.getTabAt(i)?.setCustomView(pagerAdapter.getTabViewDefault(i))
         }
 
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+                pagerAdapter.setTabState(tabLayout, tab!!.position, false)
+            }
 
-        Toast.makeText(this, "ahihi", Toast.LENGTH_SHORT).show()
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                pagerAdapter.setTabState(tabLayout, tab!!.position, true)
+
+            }
+
+            override fun onTabReselected(p0: TabLayout.Tab?) {
+
+            }
+
+        })
 
     }
 
