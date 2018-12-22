@@ -7,7 +7,6 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import com.vtv.sports.R
 import com.vtv.sports.databinding.ActivityMainBinding
-import com.vtv.sports.util.Constant
 import com.vtv.sports.view.adapter.PagerMainAdapter
 import kotlinx.android.synthetic.main.layout_content_main.view.*
 
@@ -47,9 +46,26 @@ class MainActivity : AppCompatActivity() {
         pagerMain.adapter = pagerAdapter
         tabLayout.setupWithViewPager(pagerMain)
 
-        for (i in 0..tabLayout.tabCount){
-            tabLayout.getTabAt(i)?.setCustomView(pagerAdapter.getTabView(i))
+        for (i in 0..tabLayout.tabCount) {
+            tabLayout.getTabAt(i)?.setCustomView(pagerAdapter.getTabViewDefault(i))
         }
+
+
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+                tabLayout.getTabAt(tab!!.position)?.setCustomView(pagerAdapter.getTabViewSelected(tab!!.position))
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+        })
+
 
     }
 

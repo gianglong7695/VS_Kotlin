@@ -18,5 +18,11 @@
     <string name="tab_news">News</string>
     <string name="tab_live_score">LiveScore</string>
     <string name="tab_table">Table</string>
+    <array name="arrTabName">
+        <item>Video</item>
+        <item>News</item>
+        <item>LiveScore</item>
+        <item>Table</item>
+    </array>
 
 </resources>
