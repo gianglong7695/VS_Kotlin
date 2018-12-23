@@ -4,6 +4,7 @@ buildscript {
     ext.kotlin_version = '1.2.71'
     ext.default_android_version = '28.0.0'
     ext.retrofit_version = '2.5.0'
+    ext.glide_version = '4.8.0'
     repositories {
         google()
         jcenter()
