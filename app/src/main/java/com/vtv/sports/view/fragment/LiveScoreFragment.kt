@@ -1,6 +1,7 @@
 package com.vtv.sports.view.fragment
 
 
+import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -16,10 +17,15 @@ import com.vtv.sports.R
 
 class LiveScoreFragment : BaseFragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_livescore, container, false)
+    override fun getLayoutRes(): Int {
+        return R.layout.fragment_livescore
+    }
+
+    override fun initView(binding: ViewDataBinding?) {
+
+    }
+
+    override fun initData() {
     }
 
 

@@ -1,12 +1,17 @@
 package com.vtv.sports.view.fragment
 
 
-import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.databinding.ViewDataBinding
 import com.vtv.sports.R
+import com.vtv.sports.databinding.FragmentNewsBinding
+import com.vtv.sports.model.news.NewsRespone
+import com.vtv.sports.repository.ApiConstant
+import com.vtv.sports.repository.BaseService
+import com.vtv.sports.util.Logs
+import com.vtv.sports.view.adapter.PagerNewsAdapter
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 /**
  * Created by Giang Long on 12/20/2018.
@@ -16,11 +21,39 @@ import com.vtv.sports.R
 
 class NewsFragment : BaseFragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_news, container, false)
+
+    var pagerAdapter: PagerNewsAdapter? = null
+    var binding: FragmentNewsBinding? = null
+
+    override fun getLayoutRes(): Int {
+        return R.layout.fragment_news
     }
 
+    override fun initView(binding: ViewDataBinding?) {
+        this.binding = binding as FragmentNewsBinding
+    }
+
+    override fun initData() {
+        fetchData()
+    }
+
+    private fun fetchData() {
+        val call = BaseService.getService().getNewsHome(ApiConstant.SECRET_KEY)
+        call.enqueue(object : Callback<NewsRespone> {
+            override fun onResponse(call: Call<NewsRespone>, response: Response<NewsRespone>) {
+                if (response.isSuccessful && response.body()?.childZone != null) {
+                    pagerAdapter =
+                            PagerNewsAdapter(fragmentManager, context, response.body()!!.childZone.toMutableList())
+                    binding?.pagerNews?.adapter = pagerAdapter
+                    binding?.tabLayoutNews?.setupWithViewPager(binding?.pagerNews)
+
+                }
+            }
+
+            override fun onFailure(call: Call<NewsRespone>, t: Throwable) {
+                Logs.e(t.toString())
+            }
+        })
+    }
 
 }

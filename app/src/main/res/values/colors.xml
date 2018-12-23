@@ -6,10 +6,20 @@
 
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
+    <color name="red">#dc0000</color>
+    <color name="green">#009600</color>
+    <color name="blue">#0080ff</color>
+
 
     <!-- Main -->
     <color name="bg_nav_menu_header">#0a3665</color>
     <color name="bg_tablayout">#0a3665</color>
+    <color name="bg_body_menu">#222433</color>
+    <color name="text_tabbar_default">#747d91</color>
+    <color name="text_tabbar_selected">#0a3665</color>
+    <color name="text_news_header">#222222</color>
+    <color name="text_divider">#e3e6e8</color>
+
 
 
     <!-- transparent colors -->

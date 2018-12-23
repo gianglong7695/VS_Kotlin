@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit
  */
 class BaseService {
     companion object {
-        val timeOut = 60
+        private val timeOut = 60
         private var retrofit: Retrofit? = null
 
         fun getService(): IApiService {
@@ -21,7 +21,7 @@ class BaseService {
         }
 
 
-        private fun getRetrofit(domain: () -> String): Retrofit? {
+        private fun getRetrofit(domain: String): Retrofit? {
             if (retrofit == null) {
                 val interceptor = HttpLoggingInterceptor()
                 interceptor.level = HttpLoggingInterceptor.Level.BODY
@@ -40,7 +40,7 @@ class BaseService {
                 }
 
                 retrofit = Retrofit.Builder()
-                    .baseUrl(domain.toString())
+                    .baseUrl(domain)
                     .client(client.build())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()

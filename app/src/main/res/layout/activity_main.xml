@@ -4,20 +4,24 @@
     <data></data>
 
     <android.support.v4.widget.DrawerLayout
-            android:id="@+id/drawer_layout"
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/drawer_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
             tools:context=".view.activity.MainActivity">
 
         <android.support.design.widget.NavigationView
                 android:id="@+id/navigation_menu"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_gravity="start"
                 android:fitsSystemWindows="false"
                 android:layout_height="match_parent">
-            <include layout="@layout/layout_navigation_menu"/>
+
+            <include
+                    android:id="@+id/layout_navigation"
+                    layout="@layout/layout_navigation_menu"/>
         </android.support.design.widget.NavigationView>
 
 
@@ -25,7 +29,7 @@
                 android:id="@+id/layout_content"
                 layout="@layout/layout_content_main"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"/>
 
     </android.support.v4.widget.DrawerLayout>
 </layout>

@@ -1,11 +1,7 @@
 package com.vtv.sports.view.fragment
 
 
-import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.databinding.ViewDataBinding
 import com.vtv.sports.R
 
 /**
@@ -16,10 +12,15 @@ import com.vtv.sports.R
 
 class VideoFragment : BaseFragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_video, container, false)
+    override fun getLayoutRes(): Int {
+        return R.layout.fragment_video
+    }
+
+    override fun initView(binding: ViewDataBinding?) {
+
+    }
+
+    override fun initData() {
     }
 
 

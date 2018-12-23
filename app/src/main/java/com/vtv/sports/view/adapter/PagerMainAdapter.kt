@@ -20,7 +20,7 @@ import com.vtv.sports.view.fragment.*
  * Des:
  */
 class PagerMainAdapter(fm: FragmentManager?, context: Context?) : FragmentStatePagerAdapter(fm) {
-    var context: Context? = null
+    var  context: Context? = null
 
     init {
         this.context = context
@@ -35,8 +35,7 @@ class PagerMainAdapter(fm: FragmentManager?, context: Context?) : FragmentStateP
             0 -> return VideoFragment()
             1 -> return NewsFragment()
             2 -> return LiveScoreFragment()
-            3 -> return TableFragment()
-            else -> return BaseFragment()
+            else -> return TableFragment()
         }
     }
 
@@ -54,18 +53,6 @@ class PagerMainAdapter(fm: FragmentManager?, context: Context?) : FragmentStateP
         return view
     }
 
-
-    fun getTabViewSelected(position: Int): View {
-        var view = LayoutInflater.from(context).inflate(R.layout.item_tab_layout, null)
-        var textName = view.findViewById(R.id.text_tab_name) as TextView
-        textName.text = context!!.resources.getStringArray(R.array.arrTabName)[position]
-        textName.setTextColor(ContextCompat.getColor(context!!, R.color.white))
-
-        var icon = view.findViewById(R.id.img_tab_icon) as ImageView
-        icon.setImageResource(Constant.arrTabIconsSelected[position])
-
-        return view
-    }
 
     fun setTabState(tabLayout: TabLayout, pos: Int, isSelected: Boolean) {
         var view = tabLayout.getTabAt(pos)!!.customView

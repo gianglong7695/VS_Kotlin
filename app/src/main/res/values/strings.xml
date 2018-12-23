@@ -24,5 +24,22 @@
         <item>LiveScore</item>
         <item>Table</item>
     </array>
+    <array name="arrTabTitle">
+        <item>Video</item>
+        <item>Tin tức</item>
+        <item>Lịch Thi Đấu</item>
+        <item>Bảng xếp hạng</item>
+    </array>
+
+
+    <!-- Alerts -->
+    <string name="no_connect">Không có kết nối mạng.</string>
+    <string name="network_try_again">Xin vui lòng thử lại.</string>
+    <string name="tap_screen_to_connect">Nhấp vào màn hình để thử lại.</string>
+    <string name="exit_app">Thoát ứng dụng?</string>
+    <string name="confirm_yes">Có</string>
+    <string name="confirm_no">Không</string>
+    <string name="confirm_exit">Thoát</string>
+    <string name="confirm_cancel">Hủy</string>
 
 </resources>
