@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.vtv.sports.R
 import com.vtv.sports.databinding.ItemNewsHeaderBinding
+import com.vtv.sports.databinding.ItemNewsLoadingBinding
 import com.vtv.sports.databinding.ItemNewsSimpleBinding
 import com.vtv.sports.model.news.News
 import com.vtv.sports.util.TimeDateUtils
@@ -19,37 +20,55 @@ import com.vtv.sports.util.ToastUtil
  * Skype: gianglong7695@gmail.com (id: gianglong7695_1)
  * Des:
  */
-class NewsAdapter(c: Context, listNews: List<News>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
+class NewsAdapter(c: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val TYPE_HEADER = 1
     private val TYPE_SIMPLE = 2
     private val TYPE_LOADING = 3
-    private var listNews: MutableList<News>
+
+    private var listNews: MutableList<News> = mutableListOf()
     private var inflater: LayoutInflater
     private var isHeaderEnable = true
 
     init {
-        this.listNews = listNews.toMutableList()
         this.inflater = LayoutInflater.from(c)
     }
 
-    fun insertData(data: List<News>){
-        if(data != null){
+    fun insertData(data: List<News>) {
+        if (data != null) {
             val size = listNews.size
             listNews.addAll(data)
-            notifyItemRangeChanged(size, listNews.size)
+            if (!data.equals(listNews)) {
+                notifyItemRangeChanged(size, listNews.size)
+            }
         }
+    }
+
+    open fun showLoading() {
+        var itemLoading: News = listNews.get(0)
+        itemLoading.isLoading = true
+        listNews.add(itemLoading)
+        notifyItemChanged(listNews.size - 1)
+    }
+
+
+    open fun hideLoading() {
+        var loadingPos = listNews.size - 1
+        listNews.removeAt(listNews.size - 1)
+//        notifyItemChanged(listNews.size - 1)
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         if (viewType == TYPE_HEADER) {
             var binding: ItemNewsHeaderBinding =
-                DataBindingUtil.inflate(inflater, R.layout.item_news_header, viewGroup, false)
+                    DataBindingUtil.inflate(inflater, R.layout.item_news_header, viewGroup, false)
             return HeaderVH(binding)
-        } else {
+        } else if (viewType == TYPE_SIMPLE) {
             var binding: ItemNewsSimpleBinding =
-                DataBindingUtil.inflate(inflater, R.layout.item_news_simple, viewGroup, false)
+                    DataBindingUtil.inflate(inflater, R.layout.item_news_simple, viewGroup, false)
             return SimpleVH(binding)
+        } else {
+            var binding: ItemNewsLoadingBinding = DataBindingUtil.inflate(inflater, R.layout.item_news_loading, viewGroup, false)
+            return LoadingVH(binding)
         }
     }
 
@@ -65,6 +84,8 @@ class NewsAdapter(c: Context, listNews: List<News>) : RecyclerView.Adapter<Recyc
             holder.setData(listNews.get(pos))
         } else if (holder is SimpleVH) {
             holder.setData(listNews.get(pos))
+        } else if (holder is LoadingVH) {
+            holder.setData()
         }
     }
 
@@ -72,6 +93,8 @@ class NewsAdapter(c: Context, listNews: List<News>) : RecyclerView.Adapter<Recyc
     override fun getItemViewType(position: Int): Int {
         if (position == 0 && isHeaderEnable) {
             return TYPE_HEADER
+        } else if (listNews.get(position).isLoading) {
+            return TYPE_LOADING
         } else {
             return TYPE_SIMPLE
         }
@@ -125,6 +148,18 @@ class NewsAdapter(c: Context, listNews: List<News>) : RecyclerView.Adapter<Recyc
                 }
             })
 
+        }
+    }
+
+    class LoadingVH(binding: ItemNewsLoadingBinding) : RecyclerView.ViewHolder(binding.root) {
+        var binding: ItemNewsLoadingBinding
+
+        init {
+            this.binding = binding
+        }
+
+        fun setData() {
+            Glide.with(binding.root.context).asGif().load(R.drawable.img_loading).into(binding.imgLoading)
         }
     }
 }

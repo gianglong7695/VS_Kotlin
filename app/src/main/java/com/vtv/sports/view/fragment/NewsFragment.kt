@@ -22,8 +22,8 @@ import retrofit2.Response
 class NewsFragment : BaseFragment() {
 
 
-    var pagerAdapter: PagerNewsAdapter? = null
-    var binding: FragmentNewsBinding? = null
+    lateinit var pagerAdapter: PagerNewsAdapter
+    lateinit var binding: FragmentNewsBinding
 
     override fun getLayoutRes(): Int {
         return R.layout.fragment_news
@@ -43,9 +43,10 @@ class NewsFragment : BaseFragment() {
             override fun onResponse(call: Call<NewsRespone>, response: Response<NewsRespone>) {
                 if (response.isSuccessful && response.body()?.childZone != null) {
                     pagerAdapter =
-                            PagerNewsAdapter(fragmentManager, context, response.body()!!.childZone.toMutableList())
-                    binding?.pagerNews?.adapter = pagerAdapter
-                    binding?.tabLayoutNews?.setupWithViewPager(binding?.pagerNews)
+                            PagerNewsAdapter(fragmentManager, response.body()!!.childZone.toMutableList())
+                    binding.pagerNews.offscreenPageLimit = 1
+                    binding.pagerNews.adapter = pagerAdapter
+                    binding.tabLayoutNews.setupWithViewPager(binding.pagerNews)
 
                 }
             }

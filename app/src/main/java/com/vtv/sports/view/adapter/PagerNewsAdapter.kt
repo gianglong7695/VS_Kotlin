@@ -1,11 +1,9 @@
 package com.vtv.sports.view.adapter
 
-import android.content.Context
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import com.vtv.sports.model.news.Zone
-import com.vtv.sports.view.fragment.LiveScoreFragment
 import com.vtv.sports.view.fragment.NewsZoneFragment
 
 /**
@@ -13,12 +11,18 @@ import com.vtv.sports.view.fragment.NewsZoneFragment
  * Skype: gianglong7695@gmail.com (id: gianglong7695_1)
  * Des:
  */
-class PagerNewsAdapter(fm: FragmentManager?, context: Context?, listZone: MutableList<Zone>) :
-    FragmentStatePagerAdapter(fm) {
+class PagerNewsAdapter(fm: FragmentManager?, listZone: MutableList<Zone>) :
+        FragmentStatePagerAdapter(fm) {
     private var listZone: MutableList<Zone>
 
     init {
         this.listZone = listZone
+        listZone.add(0, Zone(
+                392,
+                "Thể thao",
+                "",
+                392
+        ))
     }
 
     override fun getItem(pos: Int): Fragment {

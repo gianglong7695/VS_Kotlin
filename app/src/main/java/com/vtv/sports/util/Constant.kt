@@ -9,21 +9,23 @@ import com.vtv.sports.R
  */
 class Constant {
     companion object {
+        /* Config apps */
         val TAB_SIZE = 4
         val TAB_DEFAULT = 1
+        val DELAY_REFRESH_DEFAULT: Long = 2000
 
         val arrTabIconsDefault = intArrayOf(
-            R.drawable.ic_video,
-            R.drawable.ic_news,
-            R.drawable.ic_schedule,
-            R.drawable.ic_chart
+                R.drawable.ic_video,
+                R.drawable.ic_news,
+                R.drawable.ic_schedule,
+                R.drawable.ic_chart
         )
 
         val arrTabIconsSelected = intArrayOf(
-            R.drawable.ic_video_selected,
-            R.drawable.ic_news_selected,
-            R.drawable.ic_schedule_selected,
-            R.drawable.ic_chart_selected
+                R.drawable.ic_video_selected,
+                R.drawable.ic_news_selected,
+                R.drawable.ic_schedule_selected,
+                R.drawable.ic_chart_selected
         )
 
         // Menu items
