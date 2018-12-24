@@ -42,4 +42,11 @@
     <string name="confirm_exit">Thoát</string>
     <string name="confirm_cancel">Hủy</string>
 
+
+    <!-- Other -->
+    <string name="share">Chia sẻ</string>
+    <string name="comment">Bình luận</string>
+    <string name="transition_avatar">avatar</string>
+    <string name="copy_link">Copy link</string>
+
 </resources>

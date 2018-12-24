@@ -15,7 +15,7 @@
             app:layout_constraintRight_toRightOf="parent"
             android:layout_width="match_parent"
             android:src="@drawable/bg_splash"
-            android:layout_height="wrap_content"/>
+            android:layout_height="match_parent"/>
 
 
     <ProgressBar

@@ -65,6 +65,7 @@
                 android:paddingBottom="@dimen/size_10"
                 android:paddingRight="@dimen/size_10"
                 android:textSize="@dimen/text_size_13"
+                android:textColor="@color/text_sapo"
                 tools:text="VTV.vn - Aubameyang lập cú đúp nhưng người gây ấn tượng nhất lại là Mesut Ozil với những đường kiến tạo xuất sắc để giúp Pháo thủ tìm lại cảm giác chiến thắng!"/>
 
     </android.support.constraint.ConstraintLayout>

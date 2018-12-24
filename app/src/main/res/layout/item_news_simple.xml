@@ -22,8 +22,7 @@
                 android:layout_marginTop="@dimen/size_7"
                 android:layout_marginLeft="@dimen/size_7"
                 android:layout_width="@dimen/size_100"
-                android:layout_height="@dimen/size_100"
-                tools:src="@mipmap/ic_launcher"/>
+                android:layout_height="@dimen/size_100"/>
 
         <android.support.constraint.ConstraintLayout
                 app:layout_constraintTop_toTopOf="parent"

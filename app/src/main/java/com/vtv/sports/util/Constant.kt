@@ -12,7 +12,8 @@ class Constant {
         /* Config apps */
         val TAB_SIZE = 4
         val TAB_DEFAULT = 1
-        val DELAY_REFRESH_DEFAULT: Long = 2000
+        val DELAY_REFRESH_DEFAULT: Long = 0
+        val DELAY_TO_MAIN: Long = 2000
 
         val arrTabIconsDefault = intArrayOf(
                 R.drawable.ic_video,
@@ -45,6 +46,9 @@ class Constant {
 
         /* KEY Objects */
         val KEY_ID = "id"
+        val KEY_STRING_OBJECT = "object"
+        val KEY_LIST_NEWS = "list_news"
+        val KEY_POSITION = "pos"
 
     }
 }

@@ -1,5 +1,6 @@
 package com.vtv.sports.repository
 
+import com.vtv.sports.model.detail.DetailRespone
 import com.vtv.sports.model.menu.MenuRespone
 import com.vtv.sports.model.news.NewsRespone
 import retrofit2.Call
@@ -42,5 +43,13 @@ interface IApiService {
         @Field("zone_id") zondId: String,
         @Field("page_index") pageIndex: String
     ): Call<NewsRespone>
+
+
+    @FormUrlEncoded
+    @POST("news/detail/")
+    fun getNewsDetail(
+        @Field("secret_key") secretKey: String,
+        @Field("news_id") newsId: String
+    ): Call<DetailRespone>
 
 }

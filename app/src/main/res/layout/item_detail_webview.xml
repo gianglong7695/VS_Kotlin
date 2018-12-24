@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data></data>
+
+    <android.support.constraint.ConstraintLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <WebView
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/web_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></WebView>
+
+        <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/flex_box"
+                android:layout_width="match_parent"
+                app:layout_constraintTop_toBottomOf="@id/web_view"
+                app:flexWrap="wrap"
+                android:layout_marginLeft="@dimen/size_10"
+                android:layout_marginRight="@dimen/size_10"
+                android:layout_height="wrap_content">
+
+            <ImageView
+                    android:layout_width="@dimen/size_15"
+                    android:layout_height="@dimen/size_15"
+                    android:src="@drawable/ic_tag"/>
+
+        </com.google.android.flexbox.FlexboxLayout>
+
+        <View
+                android:id="@+id/view_divider"
+                android:layout_width="@dimen/size_5"
+                android:layout_height="@dimen/size_25"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/flex_box"
+                android:layout_marginTop="@dimen/size_10"
+                android:layout_marginLeft="@dimen/size_10"
+                android:background="@color/colorPrimary"/>
+
+        <TextView
+                app:layout_constraintTop_toTopOf="@id/view_divider"
+                app:layout_constraintBottom_toBottomOf="@id/view_divider"
+                android:layout_marginLeft="@dimen/size_5"
+                app:layout_constraintLeft_toRightOf="@id/view_divider"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tin mới"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:textSize="@dimen/text_size_17"
+                android:textAllCaps="true"/>
+    </android.support.constraint.ConstraintLayout>
+</layout>

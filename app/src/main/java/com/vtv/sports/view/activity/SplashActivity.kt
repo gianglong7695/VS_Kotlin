@@ -4,6 +4,7 @@ import android.app.Activity
 import android.os.Bundle
 import android.os.Handler
 import com.vtv.sports.R
+import com.vtv.sports.util.Constant
 
 class SplashActivity : Activity() {
 
@@ -11,7 +12,12 @@ class SplashActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        startActivity(MainActivity.newIntent(this))
-        finish()
+        Handler().postDelayed(object : Runnable {
+            override fun run() {
+                startActivity(MainActivity.newIntent(applicationContext))
+                finish()
+            }
+        }, Constant.DELAY_TO_MAIN)
+
     }
 }

@@ -1,12 +1,15 @@
 package com.vtv.sports.view.adapter
 
+import android.app.Activity
 import android.content.Context
 import android.databinding.DataBindingUtil
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
+import com.google.gson.Gson
 import com.vtv.sports.R
 import com.vtv.sports.databinding.ItemNewsHeaderBinding
 import com.vtv.sports.databinding.ItemNewsLoadingBinding
@@ -14,6 +17,7 @@ import com.vtv.sports.databinding.ItemNewsSimpleBinding
 import com.vtv.sports.model.news.News
 import com.vtv.sports.util.TimeDateUtils
 import com.vtv.sports.util.ToastUtil
+import com.vtv.sports.view.activity.NewsDetailActivity
 
 /**
  * Created by Giang Long on 12/23/2018.
@@ -60,14 +64,15 @@ class NewsAdapter(c: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         if (viewType == TYPE_HEADER) {
             var binding: ItemNewsHeaderBinding =
-                    DataBindingUtil.inflate(inflater, R.layout.item_news_header, viewGroup, false)
+                DataBindingUtil.inflate(inflater, R.layout.item_news_header, viewGroup, false)
             return HeaderVH(binding)
         } else if (viewType == TYPE_SIMPLE) {
             var binding: ItemNewsSimpleBinding =
-                    DataBindingUtil.inflate(inflater, R.layout.item_news_simple, viewGroup, false)
+                DataBindingUtil.inflate(inflater, R.layout.item_news_simple, viewGroup, false)
             return SimpleVH(binding)
         } else {
-            var binding: ItemNewsLoadingBinding = DataBindingUtil.inflate(inflater, R.layout.item_news_loading, viewGroup, false)
+            var binding: ItemNewsLoadingBinding =
+                DataBindingUtil.inflate(inflater, R.layout.item_news_loading, viewGroup, false)
             return LoadingVH(binding)
         }
     }
@@ -101,7 +106,7 @@ class NewsAdapter(c: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
     }
 
 
-    class HeaderVH(binding: ItemNewsHeaderBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class HeaderVH(binding: ItemNewsHeaderBinding) : RecyclerView.ViewHolder(binding.root) {
         var binding: ItemNewsHeaderBinding
 
         init {
@@ -119,7 +124,9 @@ class NewsAdapter(c: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
 
             binding.root.setOnClickListener(object : View.OnClickListener {
                 override fun onClick(v: View?) {
-                    ToastUtil.show(binding.root.context, news.title)
+                    val listNewsGson = Gson().toJson(listNews)
+                    val intent = NewsDetailActivity.newIntent(binding.root.context, listNewsGson, adapterPosition)
+                    binding.root.context.startActivity(intent)
                 }
             })
 
@@ -127,7 +134,7 @@ class NewsAdapter(c: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
     }
 
 
-    class SimpleVH(binding: ItemNewsSimpleBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class SimpleVH(binding: ItemNewsSimpleBinding) : RecyclerView.ViewHolder(binding.root) {
         var binding: ItemNewsSimpleBinding
 
         init {
@@ -144,7 +151,9 @@ class NewsAdapter(c: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
 
             binding.root.setOnClickListener(object : View.OnClickListener {
                 override fun onClick(v: View?) {
-                    ToastUtil.show(binding.root.context, news.title)
+                    val listNewsGson = Gson().toJson(listNews)
+                    val intent = NewsDetailActivity.newIntent(binding.root.context, listNewsGson, adapterPosition)
+                    binding.root.context.startActivity(intent)
                 }
             })
 

@@ -19,8 +19,12 @@
     <color name="text_tabbar_selected">#0a3665</color>
     <color name="text_news_header">#222222</color>
     <color name="text_divider">#e3e6e8</color>
-
-
+    <!-- Detail -->
+    <color name="text_header">#222222</color>
+    <color name="bg_facebook">#2f6099</color>
+    <color name="bg_comment">#e1e3e6</color>
+    <color name="color_border_comment">#edeff2</color>
+    <color name="text_sapo">#555555</color>
 
     <!-- transparent colors -->
     <color name="transparent">#00000000</color>
