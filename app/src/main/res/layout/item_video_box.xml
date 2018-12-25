@@ -3,159 +3,223 @@
 
     <data></data>
 
-    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="@dimen/size_10">
-
-
-        <ImageView
-            android:id="@+id/img_flag"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_star_24"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/size_10"
-            android:textAllCaps="true"
-            android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/text_size_16"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/img_flag"
-            app:layout_constraintLeft_toRightOf="@id/img_flag"
-            app:layout_constraintTop_toTopOf="@id/img_flag"
-            tools:text="Video nổi bật" />
-
-
-        <ImageView
-            android:id="@+id/img_avatar"
+    <android.support.constraint.ConstraintLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:background="@color/white"
+            android:paddingTop="@dimen/size_10"
             android:layout_marginTop="@dimen/size_10"
-            android:scaleType="fitXY"
-            app:layout_constraintDimensionRatio="16:9"
-            app:layout_constraintTop_toBottomOf="@id/img_flag" />
+            android:layout_height="wrap_content">
 
 
         <ImageView
-            android:id="@+id/img_play"
-            android:layout_width="@dimen/size_45"
-            android:layout_height="@dimen/size_45"
-            android:src="@drawable/ic_button_play"
-            app:layout_constraintBottom_toBottomOf="@id/img_avatar"
-            app:layout_constraintLeft_toLeftOf="@id/img_avatar"
-            app:layout_constraintRight_toRightOf="@id/img_avatar"
-            app:layout_constraintTop_toTopOf="@id/img_avatar" />
+                android:id="@+id/img_flag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_star_24"
+                android:layout_marginLeft="@dimen/size_10"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
 
         <TextView
-            android:id="@+id/text_duration"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/size_10"
-            android:layout_marginRight="@dimen/size_10"
-            android:background="@drawable/bg_duration"
-            android:paddingBottom="@dimen/size_3"
-            android:paddingLeft="@dimen/size_10"
-            android:paddingRight="@dimen/size_10"
-            android:paddingTop="@dimen/size_3"
-            android:text="00:00"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size_15"
-            app:layout_constraintBottom_toBottomOf="@id/img_avatar"
-            app:layout_constraintRight_toRightOf="@id/img_avatar" />
+                android:id="@+id/text_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_10"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/text_size_16"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/img_flag"
+                app:layout_constraintLeft_toRightOf="@id/img_flag"
+                app:layout_constraintTop_toTopOf="@id/img_flag"
+                tools:text="Video nổi bật"/>
+
+
+        <ImageView
+                android:id="@+id/img_avatar"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/size_10"
+                android:layout_marginLeft="@dimen/size_10"
+                android:layout_marginRight="@dimen/size_10"
+                android:scaleType="fitXY"
+                app:layout_constraintDimensionRatio="16:9"
+                app:layout_constraintTop_toBottomOf="@id/img_flag"/>
+
+
+        <ImageView
+                android:id="@+id/img_play"
+                android:layout_width="@dimen/size_45"
+                android:layout_height="@dimen/size_45"
+                android:src="@drawable/ic_button_play"
+                app:layout_constraintBottom_toBottomOf="@id/img_avatar"
+                app:layout_constraintLeft_toLeftOf="@id/img_avatar"
+                app:layout_constraintRight_toRightOf="@id/img_avatar"
+                app:layout_constraintTop_toTopOf="@id/img_avatar"/>
+
+        <TextView
+                android:id="@+id/text_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/size_10"
+                android:layout_marginRight="@dimen/size_10"
+                android:background="@drawable/bg_duration"
+                android:paddingBottom="@dimen/size_3"
+                android:paddingLeft="@dimen/size_10"
+                android:paddingRight="@dimen/size_10"
+                android:paddingTop="@dimen/size_3"
+                android:text="00:00"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_15"
+                app:layout_constraintBottom_toBottomOf="@id/img_avatar"
+                app:layout_constraintRight_toRightOf="@id/img_avatar"/>
 
 
         <android.support.constraint.ConstraintLayout
-            android:id="@+id/layout_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/bg_header_video"
-            android:paddingBottom="@dimen/size_10"
-            app:layout_constraintTop_toBottomOf="@id/img_avatar">
+                android:id="@+id/layout_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_10"
+                android:layout_marginRight="@dimen/size_10"
+                android:background="@color/bg_header_video"
+                android:paddingBottom="@dimen/size_10"
+                app:layout_constraintTop_toBottomOf="@id/img_avatar">
 
             <TextView
-                android:id="@+id/text_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/size_10"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_size_18"
-                android:textStyle="bold"
-                tools:text="VTV Sports News 12h" />
+                    android:id="@+id/text_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/size_10"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_18"
+                    android:textStyle="bold"
+                    tools:text="VTV Sports News 12h"/>
 
 
             <ImageView
-                android:id="@+id/img_circle"
-                android:layout_width="@dimen/size_8"
-                android:layout_height="@dimen/size_8"
-                android:layout_marginLeft="@dimen/size_10"
-                android:src="@drawable/ic_circle_white"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_title" />
+                    android:id="@+id/img_circle"
+                    android:layout_width="@dimen/size_8"
+                    android:layout_height="@dimen/size_8"
+                    android:layout_marginLeft="@dimen/size_10"
+                    android:src="@drawable/ic_circle_white"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_title"/>
 
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/size_10"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_size_13"
-                app:layout_constraintBottom_toBottomOf="@id/img_circle"
-                app:layout_constraintLeft_toRightOf="@id/img_circle"
-                app:layout_constraintTop_toTopOf="@id/img_circle"
-                tools:text="00:00 | 25/12/2018" />
+                    android:id="@+id/text_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_10"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_13"
+                    app:layout_constraintBottom_toBottomOf="@id/img_circle"
+                    app:layout_constraintLeft_toRightOf="@id/img_circle"
+                    app:layout_constraintTop_toTopOf="@id/img_circle"
+                    tools:text="00:00 | 25/12/2018"/>
 
         </android.support.constraint.ConstraintLayout>
 
         <android.support.constraint.ConstraintLayout
-            android:id="@+id/layout_time"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/bg_footer_video"
-            android:paddingBottom="@dimen/size_5"
-            android:paddingLeft="@dimen/size_10"
-            android:paddingTop="@dimen/size_5"
-            app:layout_constraintTop_toBottomOf="@id/layout_title">
+                android:id="@+id/layout_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/bg_footer_video"
+                android:layout_marginLeft="@dimen/size_10"
+                android:layout_marginRight="@dimen/size_10"
+                android:paddingBottom="@dimen/size_5"
+                android:paddingLeft="@dimen/size_10"
+                android:paddingTop="@dimen/size_5"
+                app:layout_constraintTop_toBottomOf="@id/layout_title">
 
 
             <ImageView
-                android:id="@+id/img_clock"
-                android:layout_width="@dimen/size_18"
-                android:layout_height="@dimen/size_18"
-                android:src="@drawable/ic_clock_white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                    android:id="@+id/img_clock"
+                    android:layout_width="@dimen/size_18"
+                    android:layout_height="@dimen/size_18"
+                    android:src="@drawable/ic_clock_white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
 
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/size_10"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_size_13"
-                app:layout_constraintBottom_toBottomOf="@id/img_clock"
-                app:layout_constraintLeft_toRightOf="@id/img_clock"
-                app:layout_constraintTop_toTopOf="@id/img_clock"
-                tools:text="5 giờ trước" />
+                    android:id="@+id/text_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_10"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_13"
+                    app:layout_constraintBottom_toBottomOf="@id/img_clock"
+                    app:layout_constraintLeft_toRightOf="@id/img_clock"
+                    app:layout_constraintTop_toTopOf="@id/img_clock"
+                    tools:text="5 giờ trước"/>
 
         </android.support.constraint.ConstraintLayout>
 
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_video"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/layout_time">
+                android:id="@+id/recycler_video"
+                android:layout_marginRight="@dimen/size_10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/layout_time">
 
         </android.support.v7.widget.RecyclerView>
+
+        <android.support.constraint.ConstraintLayout
+                android:id="@+id/layout_row_first"
+                app:layout_constraintTop_toBottomOf="@id/layout_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <include
+
+                    android:id="@+id/item_first"
+                    android:layout_width="0dp"
+                    app:layout_constraintRight_toLeftOf="@id/item_second"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_height="wrap_content"
+                    layout="@layout/item_video"/>
+
+            <include
+                    android:id="@+id/item_second"
+                    android:layout_width="0dp"
+                    app:layout_constraintLeft_toRightOf="@id/item_first"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:layout_height="wrap_content"
+                    layout="@layout/item_video"/>
+        </android.support.constraint.ConstraintLayout>
+
+
+        <android.support.constraint.ConstraintLayout
+                android:id="@+id/layout_row_second"
+                app:layout_constraintTop_toBottomOf="@id/layout_row_first"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <include
+
+                    android:id="@+id/item_third"
+                    android:layout_width="0dp"
+                    app:layout_constraintRight_toLeftOf="@id/item_fourth"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_height="wrap_content"
+                    layout="@layout/item_video"/>
+
+            <include
+                    android:id="@+id/item_fourth"
+                    android:layout_width="0dp"
+                    app:layout_constraintLeft_toRightOf="@id/item_third"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:layout_height="wrap_content"
+                    layout="@layout/item_video"/>
+        </android.support.constraint.ConstraintLayout>
 
 
     </android.support.constraint.ConstraintLayout>

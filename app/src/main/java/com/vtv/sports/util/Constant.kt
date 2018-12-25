@@ -11,7 +11,7 @@ class Constant {
     companion object {
         /* Config apps */
         val TAB_SIZE = 4
-        val TAB_DEFAULT = 1
+        val TAB_DEFAULT = 0
         val DELAY_REFRESH_DEFAULT: Long = 0
         val DELAY_TO_MAIN: Long = 2000
 

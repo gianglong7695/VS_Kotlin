@@ -86,6 +86,7 @@ class MainActivity : AppCompatActivity() {
 
         pagerMain.adapter = pagerAdapter
         tabLayout.setupWithViewPager(pagerMain)
+        pagerMain.offscreenPageLimit = Constant.arrTabIconsDefault.size
 
         for (i in 0..tabLayout.tabCount) {
             tabLayout.getTabAt(i)?.customView = pagerAdapter.getTabViewDefault(i)

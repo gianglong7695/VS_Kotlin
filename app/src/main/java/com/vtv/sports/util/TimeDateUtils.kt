@@ -18,11 +18,11 @@ class TimeDateUtils {
             var result = ""
 
             if (s != null) {
-                var dateFormat: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+                var dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
                 var date: Date = dateFormat.parse(s)
-                val prettyTime: PrettyTime = PrettyTime(Locale("vi"))
+                val prettyTime = PrettyTime(Locale("vi"))
                 result = prettyTime.formatDuration(date)
-                if (result.equals("")) {
+                if (result == "") {
                     result = "vừa xong"
                 } else {
                     result += " trước"
@@ -30,6 +30,23 @@ class TimeDateUtils {
                 return result
             }
             return result
+        }
+
+
+        fun getScheduleSport(str: String): String {
+            val ts = str.split("T".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+
+            val split0 = ts[0].split("-".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+            val format0 = String.format("%s/%s", split0[2], split0[1])
+
+            val split = ts[1].split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+            val format = String.format("%sh%s", split[0], split[1])
+            return String.format("%s | %s", format0, format)
+        }
+
+        fun convertToDuration(time: String): String {
+            val split = time.split("\\.".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+            return String.format("%s", split[0])
         }
     }
 }

@@ -54,16 +54,15 @@ class NewsDetailFragment : BaseFragment() {
         )
 
         binding.recyclerDetail.layoutManager = Utils.getLayoutManagerVer(context!!)
+
+        val obj = arguments!!.getString(Constant.KEY_STRING_OBJECT)
+        news = Gson().fromJson(obj, News::class.java)
+        adapter = NewsDetailAdapter(context!!, news)
+        binding.recyclerDetail.adapter = adapter
     }
 
     override fun initData() {
-        val obj = arguments!!.getString(Constant.KEY_STRING_OBJECT)
-        news = Gson().fromJson(obj, News::class.java)
-
-
         fetchData()
-        adapter = NewsDetailAdapter(context!!, news)
-        binding.recyclerDetail.adapter = adapter
     }
 
 

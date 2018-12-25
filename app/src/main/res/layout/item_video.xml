@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data></data>
+
+    <android.support.constraint.ConstraintLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:paddingLeft="@dimen/size_10"
+            android:paddingBottom="@dimen/size_10"
+            android:background="?attr/selectableItemBackground"
+            android:layout_height="wrap_content">
+
+
+        <ImageView
+                android:id="@+id/img_avatar"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/size_10"
+                android:scaleType="fitXY"
+                app:layout_constraintDimensionRatio="16:9"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+
+        <ImageView
+                android:id="@+id/img_play"
+                android:layout_width="@dimen/size_30"
+                android:layout_height="@dimen/size_30"
+                android:src="@drawable/ic_button_play"
+                app:layout_constraintBottom_toBottomOf="@id/img_avatar"
+                app:layout_constraintLeft_toLeftOf="@id/img_avatar"
+                app:layout_constraintRight_toRightOf="@id/img_avatar"
+                app:layout_constraintTop_toTopOf="@id/img_avatar"/>
+
+
+        <TextView
+                app:layout_constraintTop_toBottomOf="@id/img_avatar"
+                android:id="@+id/text_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_10"
+                android:paddingLeft="@dimen/size_10"
+                android:paddingRight="@dimen/size_10"
+                tools:text="Arsenal 2 - 1 Swansea City"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"/>
+
+
+        <ImageView
+                android:id="@+id/img_clock"
+                android:layout_width="@dimen/size_18"
+                android:layout_height="@dimen/size_18"
+                android:src="@drawable/ic_clock"
+                android:layout_marginLeft="@dimen/size_10"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginTop="@dimen/size_10"
+                app:layout_constraintTop_toBottomOf="@id/text_title"/>
+
+
+        <TextView
+                android:id="@+id/text_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_10"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/text_size_13"
+                app:layout_constraintBottom_toBottomOf="@id/img_clock"
+                app:layout_constraintLeft_toRightOf="@id/img_clock"
+                app:layout_constraintTop_toTopOf="@id/img_clock"
+                tools:text="5 giờ trước"/>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

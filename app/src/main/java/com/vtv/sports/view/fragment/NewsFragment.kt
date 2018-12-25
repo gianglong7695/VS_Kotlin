@@ -24,6 +24,8 @@ class NewsFragment : BaseFragment() {
 
     lateinit var pagerAdapter: PagerNewsAdapter
     lateinit var binding: FragmentNewsBinding
+    var isLoaded = false
+
 
     override fun getLayoutRes(): Int {
         return R.layout.fragment_news
@@ -33,8 +35,25 @@ class NewsFragment : BaseFragment() {
         this.binding = binding as FragmentNewsBinding
     }
 
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+
+        if (isVisibleToUser && isResumed)
+            if (!isLoaded) {
+                fetchData()
+                isLoaded = true
+            }
+
+
+    }
+
     override fun initData() {
-        fetchData()
+        if (userVisibleHint) { // fragment is visible
+            if (!isLoaded) {
+                fetchData()
+                isLoaded = true
+            }
+        }
     }
 
     private fun fetchData() {

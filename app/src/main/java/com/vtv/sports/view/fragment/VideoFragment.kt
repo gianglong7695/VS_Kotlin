@@ -3,13 +3,14 @@ package com.vtv.sports.view.fragment
 
 import android.databinding.ViewDataBinding
 import com.vtv.sports.R
-import com.vtv.sports.databinding.FragmentNewsBinding
 import com.vtv.sports.databinding.FragmentVideoBinding
 import com.vtv.sports.model.video.VideoGroup
 import com.vtv.sports.model.video.VideoRespone
 import com.vtv.sports.repository.ApiConstant
 import com.vtv.sports.repository.BaseService
 import com.vtv.sports.util.Logs
+import com.vtv.sports.util.Utils
+import com.vtv.sports.view.adapter.VideoAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -22,7 +23,9 @@ import retrofit2.Response
 
 class VideoFragment : BaseFragment() {
     lateinit var binding: FragmentVideoBinding
-    var listGroup: List<VideoGroup> = listOf()
+    var listGroup: MutableList<VideoGroup> = mutableListOf()
+    lateinit var videoAdapter: VideoAdapter
+    var isLoaded = false
 
     override fun getLayoutRes(): Int {
         return R.layout.fragment_video
@@ -30,10 +33,33 @@ class VideoFragment : BaseFragment() {
 
     override fun initView(binding: ViewDataBinding?) {
         this.binding = binding as FragmentVideoBinding
+        videoAdapter = VideoAdapter(context!!)
+        binding.recyclerVideo.layoutManager = Utils.getLayoutManagerVer(context!!)
+        binding.recyclerVideo.adapter = videoAdapter
+        binding.recyclerVideo.setHasFixedSize(true)
+        binding.recyclerVideo.setItemViewCacheSize(0)
+    }
+
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+
+        if (isVisibleToUser && isResumed)
+            if (!isLoaded) {
+                fetchData()
+                isLoaded = true
+            }
+
+
     }
 
     override fun initData() {
-        fetchData()
+        if (userVisibleHint) { // fragment is visible
+            if (!isLoaded) {
+                fetchData()
+                isLoaded = true
+            }
+        }
     }
 
 
@@ -42,7 +68,19 @@ class VideoFragment : BaseFragment() {
         call.enqueue(object : Callback<VideoRespone> {
             override fun onResponse(call: Call<VideoRespone>, response: Response<VideoRespone>) {
                 if (response.isSuccessful) {
+                    val video = response.body()!!
 
+                    listGroup.add(VideoGroup(video.videoZone[0], video.noiBat))
+                    listGroup.add(VideoGroup(video.videoZone[6], video.vtvSportNews))
+                    listGroup.add(VideoGroup(video.videoZone[1], video.highlight))
+                    listGroup.add(VideoGroup(video.videoZone[7], video.tuVanTheThao))
+                    listGroup.add(VideoGroup(video.videoZone[2], video.trongNuoc))
+                    listGroup.add(VideoGroup(video.videoZone[3], video.quocTe))
+                    listGroup.add(VideoGroup(video.videoZone[4], video.hauTruong))
+                    listGroup.add(VideoGroup(video.videoZone[5], video.tongHopBanThang))
+
+
+                    videoAdapter.setVideoList(listGroup)
                 }
             }
 
