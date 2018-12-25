@@ -13,10 +13,9 @@ import com.vtv.sports.view.fragment.NewsZoneFragment
  */
 class PagerNewsAdapter(fm: FragmentManager?, listZone: MutableList<Zone>) :
         FragmentStatePagerAdapter(fm) {
-    private var listZone: MutableList<Zone>
+    private var listZone: MutableList<Zone> = listZone
 
     init {
-        this.listZone = listZone
         listZone.add(0, Zone(
                 392,
                 "Thể thao",
@@ -26,14 +25,14 @@ class PagerNewsAdapter(fm: FragmentManager?, listZone: MutableList<Zone>) :
     }
 
     override fun getItem(pos: Int): Fragment {
-        return NewsZoneFragment.newInstance(listZone.get(pos).id.toString())
+        return NewsZoneFragment.newInstance(listZone[pos].id.toString())
     }
 
     override fun getCount(): Int {
-        if (listZone != null) return listZone.size else return 0
+        return listZone.size
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
-        return listZone.get(position).name
+        return listZone[position].name
     }
 }

@@ -53,8 +53,7 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         fun newIntent(context: Context): Intent {
-            val intent = Intent(context, MainActivity::class.java)
-            return intent
+            return Intent(context, MainActivity::class.java)
         }
     }
 
@@ -93,7 +92,7 @@ class MainActivity : AppCompatActivity() {
         tabLayout.setupWithViewPager(pagerMain)
 
         for (i in 0..tabLayout.tabCount) {
-            tabLayout.getTabAt(i)?.setCustomView(pagerAdapter.getTabViewDefault(i))
+            tabLayout.getTabAt(i)?.customView = pagerAdapter.getTabViewDefault(i)
         }
 
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -137,7 +136,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<MenuRespone>, t: Throwable) {
-                ToastUtil.show(applicationContext, "onFailure")
+                ToastUtil(applicationContext, "onFailure")
                 addMenuItemStatic()
             }
         })
@@ -147,7 +146,7 @@ class MainActivity : AppCompatActivity() {
 
     fun setCurrentTabDefault(pos: Int) {
         pagerAdapter.setTabState(tabLayout, pos, true)
-        pagerMain.setCurrentItem(Constant.TAB_DEFAULT)
+        pagerMain.currentItem = Constant.TAB_DEFAULT
         binding.layoutContent.text_title.text = resources.getStringArray(R.array.arrTabTitle)[pos]
     }
 

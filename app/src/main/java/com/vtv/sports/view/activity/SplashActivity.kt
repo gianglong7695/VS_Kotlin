@@ -12,11 +12,9 @@ class SplashActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        Handler().postDelayed(object : Runnable {
-            override fun run() {
-                startActivity(MainActivity.newIntent(applicationContext))
-                finish()
-            }
+        Handler().postDelayed({
+            startActivity(MainActivity.newIntent(applicationContext))
+            finish()
         }, Constant.DELAY_TO_MAIN)
 
     }

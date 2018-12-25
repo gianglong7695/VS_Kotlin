@@ -58,11 +58,7 @@ class NewsDetailAdapter(c: Context, news: News) : RecyclerView.Adapter<RecyclerV
 
 
     class HeaderVH(binding: ItemDetailHeaderBinding) : RecyclerView.ViewHolder(binding.root) {
-        var binding: ItemDetailHeaderBinding
-
-        init {
-            this.binding = binding
-        }
+        var binding: ItemDetailHeaderBinding = binding
 
         fun setData(news: News) {
             Glide.with(binding.root.context).load(news.avatar).into(binding.imgAvatar)

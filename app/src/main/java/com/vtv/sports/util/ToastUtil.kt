@@ -8,10 +8,8 @@ import android.widget.Toast
  * Skype: gianglong7695@gmail.com (id: gianglong7695_1)
  * Des:
  */
-class ToastUtil {
-    companion object {
-        fun show(c: Context, msg: String){
-            Toast.makeText(c, msg, Toast.LENGTH_SHORT).show()
-        }
+class ToastUtil(c: Context, msg: String) {
+    init {
+        Toast.makeText(c, msg, Toast.LENGTH_SHORT).show()
     }
 }

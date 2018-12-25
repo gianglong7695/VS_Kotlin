@@ -50,25 +50,17 @@ class NewsDetailActivity : AppCompatActivity() {
         pagerAdapter = PagerDetailAdapter(supportFragmentManager, listNews)
         binding.pagerNewsDetail.offscreenPageLimit = 1
         binding.pagerNewsDetail.adapter = pagerAdapter
-        binding.pagerNewsDetail.setCurrentItem(currentPos)
+        binding.pagerNewsDetail.currentItem = currentPos
 
-        binding.layoutToolbar.img_back.setOnClickListener(object : View.OnClickListener{
-            override fun onClick(v: View?) {
-                onBackPressed()
-            }
-        })
-
-        binding.layoutToolbar.img_more.setOnClickListener(object : View.OnClickListener{
-            override fun onClick(v: View?) {
-                ToastUtil.show(applicationContext, "Click")
-            }
-        })
-
-        binding.layoutToolbar.text_copy.setOnClickListener(object : View.OnClickListener{
-            override fun onClick(v: View?) {
-                ToastUtil.show(applicationContext, "Click")
-            }
-        })
+        binding.layoutToolbar.img_back.setOnClickListener {
+            onBackPressed()
+        }
+        binding.layoutToolbar.img_more.setOnClickListener {
+            ToastUtil(applicationContext, "Click")
+        }
+        binding.layoutToolbar.text_copy.setOnClickListener {
+            ToastUtil(applicationContext, "Click")
+        }
 
     }
 

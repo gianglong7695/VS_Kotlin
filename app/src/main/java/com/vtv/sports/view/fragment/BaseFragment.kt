@@ -23,7 +23,7 @@ open abstract class BaseFragment : Fragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding: ViewDataBinding? = DataBindingUtil.inflate<ViewDataBinding>(inflater, getLayoutRes(), container, false)
+        val binding: ViewDataBinding? = DataBindingUtil.inflate(inflater, getLayoutRes(), container, false)
         initView(binding)
         return binding?.root
     }

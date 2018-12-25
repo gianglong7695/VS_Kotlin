@@ -13,14 +13,10 @@ import com.vtv.sports.view.fragment.NewsDetailFragment
  * Des:
  */
 class PagerDetailAdapter(fm: FragmentManager?, listNews: List<News>) : FragmentStatePagerAdapter(fm) {
-    var listNews: List<News>
-
-    init {
-        this.listNews = listNews
-    }
+    var listNews: List<News> = listNews
 
     override fun getItem(pos: Int): Fragment {
-        return NewsDetailFragment.newInstance(Gson().toJson(listNews.get(pos)))
+        return NewsDetailFragment.newInstance(Gson().toJson(listNews[pos]))
     }
 
     override fun getCount(): Int {

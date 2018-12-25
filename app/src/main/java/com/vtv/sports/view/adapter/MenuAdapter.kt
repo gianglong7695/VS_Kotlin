@@ -17,14 +17,8 @@ import com.vtv.sports.util.ToastUtil
  * Des:
  */
 class MenuAdapter(c: Context, data: List<MenuLeft>) : RecyclerView.Adapter<MenuAdapter.ViewHolder>() {
-    private var data: List<MenuLeft>? = null
-    private var inflater: LayoutInflater
-
-    init {
-        this.data = data
-        inflater = LayoutInflater.from(c)
-    }
-
+    private var data: List<MenuLeft> = data
+    private var inflater: LayoutInflater = LayoutInflater.from(c)
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, pos: Int): ViewHolder {
         var binding: ItemMenuBinding = DataBindingUtil.inflate(inflater, R.layout.item_menu, viewGroup, false)
@@ -32,24 +26,15 @@ class MenuAdapter(c: Context, data: List<MenuLeft>) : RecyclerView.Adapter<MenuA
     }
 
     override fun getItemCount(): Int {
-        if (data != null)
-            return data!!.size
-        return 0
+        return data.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, pos: Int) {
-        holder.setData(data!!.get(pos))
+        holder.setData(data[pos])
     }
 
-
     inner class ViewHolder(binding: ItemMenuBinding) : RecyclerView.ViewHolder(binding.root) {
-        private var binding: ItemMenuBinding
-
-        init {
-            this.binding = binding
-
-
-        }
+        private var binding: ItemMenuBinding = binding
 
         fun setData(item: MenuLeft) {
             if (item.zoneName != null)
@@ -69,14 +54,9 @@ class MenuAdapter(c: Context, data: List<MenuLeft>) : RecyclerView.Adapter<MenuA
                 binding.imgIcon.setImageResource(item.imageRes)
             }
 
-
-            binding.root.setOnClickListener(object : View.OnClickListener {
-                override fun onClick(v: View?) {
-                    ToastUtil.show(binding.root.context, item.zoneName)
-                }
-
-            })
-
+            binding.root.setOnClickListener {
+                ToastUtil(binding.root.context, item.zoneName)
+            }
         }
     }
 }

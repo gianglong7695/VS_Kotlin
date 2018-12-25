@@ -19,23 +19,19 @@ import com.vtv.sports.view.fragment.*
  * Skype: gianglong7695@gmail.com (id: gianglong7695_1)
  * Des:
  */
-class PagerMainAdapter(fm: FragmentManager?, context: Context?) : FragmentStatePagerAdapter(fm) {
-    var  context: Context? = null
-
-    init {
-        this.context = context
-    }
+class PagerMainAdapter(fm: FragmentManager?, context: Context) : FragmentStatePagerAdapter(fm) {
+    var  context: Context = context
 
     override fun getCount(): Int {
         return Constant.TAB_SIZE
     }
 
     override fun getItem(p0: Int): Fragment {
-        when (p0) {
-            0 -> return VideoFragment()
-            1 -> return NewsFragment()
-            2 -> return LiveScoreFragment()
-            else -> return TableFragment()
+        return when (p0) {
+            0 -> VideoFragment()
+            1 -> NewsFragment()
+            2 -> LiveScoreFragment()
+            else -> TableFragment()
         }
     }
 

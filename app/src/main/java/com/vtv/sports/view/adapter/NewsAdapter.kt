@@ -1,9 +1,7 @@
 package com.vtv.sports.view.adapter
 
-import android.app.Activity
 import android.content.Context
 import android.databinding.DataBindingUtil
-import android.support.v4.app.ActivityOptionsCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +14,6 @@ import com.vtv.sports.databinding.ItemNewsLoadingBinding
 import com.vtv.sports.databinding.ItemNewsSimpleBinding
 import com.vtv.sports.model.news.News
 import com.vtv.sports.util.TimeDateUtils
-import com.vtv.sports.util.ToastUtil
 import com.vtv.sports.view.activity.NewsDetailActivity
 
 /**
@@ -30,18 +27,14 @@ class NewsAdapter(c: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
     private val TYPE_LOADING = 3
 
     private var listNews: MutableList<News> = mutableListOf()
-    private var inflater: LayoutInflater
+    private var inflater: LayoutInflater = LayoutInflater.from(c)
     private var isHeaderEnable = true
-
-    init {
-        this.inflater = LayoutInflater.from(c)
-    }
 
     fun insertData(data: List<News>) {
         if (data != null) {
             val size = listNews.size
             listNews.addAll(data)
-            if (!data.equals(listNews)) {
+            if (data != listNews) {
                 notifyItemRangeChanged(size, listNews.size)
             }
         }
@@ -62,57 +55,51 @@ class NewsAdapter(c: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        if (viewType == TYPE_HEADER) {
-            var binding: ItemNewsHeaderBinding =
-                DataBindingUtil.inflate(inflater, R.layout.item_news_header, viewGroup, false)
-            return HeaderVH(binding)
-        } else if (viewType == TYPE_SIMPLE) {
-            var binding: ItemNewsSimpleBinding =
-                DataBindingUtil.inflate(inflater, R.layout.item_news_simple, viewGroup, false)
-            return SimpleVH(binding)
-        } else {
-            var binding: ItemNewsLoadingBinding =
-                DataBindingUtil.inflate(inflater, R.layout.item_news_loading, viewGroup, false)
-            return LoadingVH(binding)
+        when (viewType) {
+            TYPE_HEADER -> {
+                var binding: ItemNewsHeaderBinding =
+                        DataBindingUtil.inflate(inflater, R.layout.item_news_header, viewGroup, false)
+                return HeaderVH(binding)
+            }
+            TYPE_SIMPLE -> {
+                var binding: ItemNewsSimpleBinding =
+                        DataBindingUtil.inflate(inflater, R.layout.item_news_simple, viewGroup, false)
+                return SimpleVH(binding)
+            }
+            else -> {
+                var binding: ItemNewsLoadingBinding =
+                        DataBindingUtil.inflate(inflater, R.layout.item_news_loading, viewGroup, false)
+                return LoadingVH(binding)
+            }
         }
     }
 
     override fun getItemCount(): Int {
-        if (listNews != null)
-            return listNews.size
-        else
-            return 0
+        return listNews.size
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, pos: Int) {
-        if (holder is HeaderVH) {
-            holder.setData(listNews.get(pos))
-        } else if (holder is SimpleVH) {
-            holder.setData(listNews.get(pos))
-        } else if (holder is LoadingVH) {
-            holder.setData()
+        when (holder) {
+            is HeaderVH -> holder.setData(listNews[pos])
+            is SimpleVH -> holder.setData(listNews[pos])
+            is LoadingVH -> holder.setData()
         }
     }
 
 
     override fun getItemViewType(position: Int): Int {
-        if (position == 0 && isHeaderEnable) {
-            return TYPE_HEADER
-        } else if (listNews.get(position).isLoading) {
-            return TYPE_LOADING
+        return if (position == 0 && isHeaderEnable) {
+            TYPE_HEADER
+        } else if (listNews[position].isLoading) {
+            TYPE_LOADING
         } else {
-            return TYPE_SIMPLE
+            TYPE_SIMPLE
         }
     }
 
 
     inner class HeaderVH(binding: ItemNewsHeaderBinding) : RecyclerView.ViewHolder(binding.root) {
-        var binding: ItemNewsHeaderBinding
-
-        init {
-            this.binding = binding
-
-        }
+        var binding: ItemNewsHeaderBinding = binding
 
         fun setData(news: News) {
             if (news != null) {
@@ -122,25 +109,18 @@ class NewsAdapter(c: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
                 binding.textSapo.text = news.sapo
             }
 
-            binding.root.setOnClickListener(object : View.OnClickListener {
-                override fun onClick(v: View?) {
-                    val listNewsGson = Gson().toJson(listNews)
-                    val intent = NewsDetailActivity.newIntent(binding.root.context, listNewsGson, adapterPosition)
-                    binding.root.context.startActivity(intent)
-                }
-            })
+            binding.root.setOnClickListener{
+                val listNewsGson = Gson().toJson(listNews)
+                val intent = NewsDetailActivity.newIntent(binding.root.context, listNewsGson, adapterPosition)
+                binding.root.context.startActivity(intent)
+            }
 
         }
     }
 
 
     inner class SimpleVH(binding: ItemNewsSimpleBinding) : RecyclerView.ViewHolder(binding.root) {
-        var binding: ItemNewsSimpleBinding
-
-        init {
-            this.binding = binding
-
-        }
+        var binding: ItemNewsSimpleBinding = binding
 
         fun setData(news: News) {
             if (news != null) {
@@ -149,23 +129,17 @@ class NewsAdapter(c: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
                 binding.textDate.text = TimeDateUtils.convertToDate(news.distributionDate)
             }
 
-            binding.root.setOnClickListener(object : View.OnClickListener {
-                override fun onClick(v: View?) {
-                    val listNewsGson = Gson().toJson(listNews)
-                    val intent = NewsDetailActivity.newIntent(binding.root.context, listNewsGson, adapterPosition)
-                    binding.root.context.startActivity(intent)
-                }
-            })
+            binding.root.setOnClickListener {
+                val listNewsGson = Gson().toJson(listNews)
+                val intent = NewsDetailActivity.newIntent(binding.root.context, listNewsGson, adapterPosition)
+                binding.root.context.startActivity(intent)
+            }
 
         }
     }
 
     class LoadingVH(binding: ItemNewsLoadingBinding) : RecyclerView.ViewHolder(binding.root) {
-        var binding: ItemNewsLoadingBinding
-
-        init {
-            this.binding = binding
-        }
+        var binding: ItemNewsLoadingBinding = binding
 
         fun setData() {
             Glide.with(binding.root.context).asGif().load(R.drawable.img_loading).into(binding.imgLoading)
