@@ -67,10 +67,6 @@ class MainActivity : AppCompatActivity() {
             R.string.navigation_drawer_open,
             R.string.navigation_drawer_close
         ) {
-            override fun onDrawerClosed(view: View) {
-                super.onDrawerClosed(view)
-            }
-
             override fun onDrawerOpened(view: View) {
                 super.onDrawerOpened(view)
                 if (!isDrawerInitialized) {

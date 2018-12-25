@@ -2,9 +2,9 @@ package com.vtv.sports.view.activity
 
 import android.app.Activity
 import android.os.Bundle
-import android.os.Handler
 import com.vtv.sports.R
 import com.vtv.sports.util.Constant
+import com.vtv.sports.util.Utils
 
 class SplashActivity : Activity() {
 
@@ -12,10 +12,9 @@ class SplashActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        Handler().postDelayed({
+        Utils.after(Constant.DELAY_TO_MAIN) {
             startActivity(MainActivity.newIntent(applicationContext))
             finish()
-        }, Constant.DELAY_TO_MAIN)
-
+        }
     }
 }

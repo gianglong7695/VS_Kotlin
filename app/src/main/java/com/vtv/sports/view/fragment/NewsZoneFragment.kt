@@ -3,9 +3,7 @@ package com.vtv.sports.view.fragment
 
 import android.databinding.ViewDataBinding
 import android.os.Bundle
-import android.os.Handler
 import android.support.v4.content.ContextCompat
-import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.RecyclerView
 import com.vtv.sports.R
 import com.vtv.sports.databinding.FragmentNewsZoneBinding
@@ -16,7 +14,6 @@ import com.vtv.sports.repository.BaseService
 import com.vtv.sports.util.Constant
 import com.vtv.sports.util.Logs
 import com.vtv.sports.util.Utils
-import com.vtv.sports.view.activity.MainActivity
 import com.vtv.sports.view.adapter.NewsAdapter
 import retrofit2.Call
 import retrofit2.Callback
@@ -54,15 +51,11 @@ class NewsZoneFragment : BaseFragment() {
     override fun initView(binding: ViewDataBinding?) {
         this.binding = binding as FragmentNewsZoneBinding
         binding.swipeRefresh.setColorSchemeColors(
-            ContextCompat.getColor(context!!, R.color.red),
-            ContextCompat.getColor(context!!, R.color.green),
-            ContextCompat.getColor(context!!, R.color.blue)
+                ContextCompat.getColor(context!!, R.color.red),
+                ContextCompat.getColor(context!!, R.color.green),
+                ContextCompat.getColor(context!!, R.color.blue)
         )
-        binding.swipeRefresh.setOnRefreshListener(object : SwipeRefreshLayout.OnRefreshListener {
-            override fun onRefresh() {
-                fetchData(zoneId)
-            }
-        })
+        binding.swipeRefresh.setOnRefreshListener { fetchData(zoneId) }
 
         binding.recyclerNews.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -137,12 +130,9 @@ class NewsZoneFragment : BaseFragment() {
     }
 
     private fun hideRefresh() {
-        Handler().postDelayed(object : Runnable {
-            override fun run() {
-                binding.swipeRefresh.isRefreshing = false
-            }
-        }, Constant.DELAY_REFRESH_DEFAULT)
-
+        Utils.after(Constant.DELAY_REFRESH_DEFAULT) {
+            binding.swipeRefresh.isRefreshing = false
+        }
     }
 
 

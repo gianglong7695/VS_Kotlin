@@ -1,6 +1,8 @@
 package com.vtv.sports.util
 
+import android.app.Activity
 import android.content.Context
+import android.os.Handler
 import android.support.v7.widget.LinearLayoutManager
 
 /**
@@ -21,5 +23,22 @@ class Utils {
             layoutManager.orientation = LinearLayoutManager.HORIZONTAL
             return layoutManager
         }
+
+        fun after(delay: Long, process: () -> Unit) {
+            Handler().postDelayed({
+                process()
+            }, delay)
+        }
+
+        fun afterOnMain(delay: Long, activity: Activity, process: () -> Unit) {
+            Handler().postDelayed({
+                activity.runOnUiThread {
+                    Runnable {
+                        process()
+                    }
+                }
+            }, delay)
+        }
+
     }
 }
