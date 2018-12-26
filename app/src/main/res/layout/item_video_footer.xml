@@ -8,7 +8,8 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:paddingBottom="@dimen/size_10">
 
 
         <android.support.constraint.ConstraintLayout
@@ -149,6 +150,30 @@
                 tools:text="5 giờ trước" />
         </android.support.constraint.ConstraintLayout>
 
-    </android.support.constraint.ConstraintLayout>
+        <TextView
+            android:id="@+id/more_video"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_40"
+            android:layout_margin="@dimen/size_10"
+            android:background="@color/bg_header_video"
+            android:gravity="center"
+            android:text="Xem tất cả"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_15"
+            android:textStyle="bold"
+            android:visibility="visible"
+            app:layout_constraintTop_toBottomOf="@id/item_first" />
 
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_10"
+            android:layout_marginTop="@dimen/size_10"
+            android:background="@color/default_background"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/more_video" />
+
+
+    </android.support.constraint.ConstraintLayout>
 </layout>

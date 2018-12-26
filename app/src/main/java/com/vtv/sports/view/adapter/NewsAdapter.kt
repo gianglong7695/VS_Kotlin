@@ -40,8 +40,13 @@ class NewsAdapter(c: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
         }
     }
 
+
+    fun setHeaderEnable(isHeader: Boolean){
+        this.isHeaderEnable = isHeader
+    }
+
     open fun showLoading() {
-        var itemLoading: News = listNews.get(0)
+        var itemLoading: News = listNews[0]
         itemLoading.isLoading = true
         listNews.add(itemLoading)
         notifyItemChanged(listNews.size - 1)

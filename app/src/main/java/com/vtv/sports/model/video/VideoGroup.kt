@@ -7,5 +7,6 @@ package com.vtv.sports.model.video
  */
 data class VideoGroup(
         val videoZone: VideoZone,
-        val listVideo: List<VideoBox>
+        val listVideo: List<VideoBox>,
+        val type: Int
 )

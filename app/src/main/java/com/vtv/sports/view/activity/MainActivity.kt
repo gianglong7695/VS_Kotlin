@@ -5,6 +5,7 @@ import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.design.widget.TabLayout
+import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
@@ -16,12 +17,11 @@ import com.vtv.sports.model.menu.MenuLeft
 import com.vtv.sports.model.menu.MenuRespone
 import com.vtv.sports.repository.ApiConstant
 import com.vtv.sports.repository.BaseService
-import com.vtv.sports.util.Constant
-import com.vtv.sports.util.ToastUtil
-import com.vtv.sports.util.Utils
+import com.vtv.sports.util.*
 import com.vtv.sports.view.adapter.MenuAdapter
 import com.vtv.sports.view.adapter.PagerMainAdapter
 import com.vtv.sports.view.custom.NonSwipeableViewPager
+import com.vtv.sports.view.listener.IFragmentCallBack
 import kotlinx.android.synthetic.main.layout_content_main.view.*
 import kotlinx.android.synthetic.main.layout_navigation_menu.view.*
 import retrofit2.Call
@@ -34,7 +34,7 @@ import retrofit2.Response
  * Des:
  */
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), IFragmentCallBack {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var drawerToggle: ActionBarDrawerToggle
@@ -61,11 +61,11 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.layoutContent.toolbar_main)
         supportActionBar?.setHomeButtonEnabled(true)
         drawerToggle = object : ActionBarDrawerToggle(
-            this,
-            binding.drawerLayout,
-            binding.layoutContent.toolbar_main,
-            R.string.navigation_drawer_open,
-            R.string.navigation_drawer_close
+                this,
+                binding.drawerLayout,
+                binding.layoutContent.toolbar_main,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close
         ) {
             override fun onDrawerOpened(view: View) {
                 super.onDrawerOpened(view)
@@ -150,40 +150,40 @@ class MainActivity : AppCompatActivity() {
 
     fun addMenuItemStatic() {
         menuList.add(
-            0,
-            MenuLeft(
-                Constant.MENU_ID_BREAKING_NEWS,
-                Constant.MENU_NAME_BREAKING_NEWS,
-                "",
-                R.drawable.ic_breaking_news
-            )
+                0,
+                MenuLeft(
+                        Constant.MENU_ID_BREAKING_NEWS,
+                        Constant.MENU_NAME_BREAKING_NEWS,
+                        "",
+                        R.drawable.ic_breaking_news
+                )
         )
 
         menuList.add(
-            MenuLeft(
-                Constant.MENU_ID_SAVING_NEWS,
-                Constant.MENU_NAME_SAVING_NEWS,
-                "",
-                R.drawable.ic_bookmark_black_24dp
-            )
+                MenuLeft(
+                        Constant.MENU_ID_SAVING_NEWS,
+                        Constant.MENU_NAME_SAVING_NEWS,
+                        "",
+                        R.drawable.ic_bookmark_black_24dp
+                )
         )
 
         menuList.add(
-            MenuLeft(
-                Constant.MENU_ID_CONTACT,
-                Constant.MENU_NAME_CONTACT,
-                "",
-                R.drawable.ic_contact_blue_large
-            )
+                MenuLeft(
+                        Constant.MENU_ID_CONTACT,
+                        Constant.MENU_NAME_CONTACT,
+                        "",
+                        R.drawable.ic_contact_blue_large
+                )
         )
 
         menuList.add(
-            MenuLeft(
-                Constant.MENU_ID_WEBSITE,
-                Constant.MENU_NAME_WEBSITE,
-                "",
-                R.drawable.ic_arrow_forward_black_24dp
-            )
+                MenuLeft(
+                        Constant.MENU_ID_WEBSITE,
+                        Constant.MENU_NAME_WEBSITE,
+                        "",
+                        R.drawable.ic_arrow_forward_black_24dp
+                )
         )
 
         if (menuAdapter == null) {
@@ -200,6 +200,14 @@ class MainActivity : AppCompatActivity() {
             binding.drawerLayout.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
+        }
+    }
+
+    override fun onAddFragment(frm: Fragment, style: Int) {
+        if (NetworkUtil.isNetworkAvailable(this)) {
+            FragmentUtil.addFragment(this, R.id.frame_main, frm, true, FragmentUtil.SLIDE_RIGHT)
+        }else{
+            ToastUtil(this, Constant.NO_CONNECT)
         }
     }
 

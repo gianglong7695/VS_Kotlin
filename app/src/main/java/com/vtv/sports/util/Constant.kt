@@ -49,6 +49,12 @@ class Constant {
         val KEY_STRING_OBJECT = "object"
         val KEY_LIST_NEWS = "list_news"
         val KEY_POSITION = "pos"
+        val KEY_TITLE = "title"
+
+        /* Video */
+        val TYPE_HEADER = 1
+        val TYPE_ITEM = 2
+        val TYPE_FOOTER = 3
 
     }
 }

@@ -60,4 +60,13 @@ interface IApiService {
             @Field("secret_key") secretKey: String
     ): Call<VideoRespone>
 
+    @FormUrlEncoded
+    @POST("video/zone/paging/")
+    fun getVideoPaging(
+            @Field("secret_key") secretKey: String,
+            @Field("zone_id") zoneId: String,
+            @Field("page_index") pageIndex: String,
+            @Field("page_size") pageSize: String
+    ): Call<VideoRespone>
+
 }
