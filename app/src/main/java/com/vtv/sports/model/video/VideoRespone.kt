@@ -29,5 +29,7 @@ data class VideoRespone(
         @SerializedName("VtvSportLive")
         val vtvSportLive: List<VideoBox>,
         @SerializedName("VtvSportNews")
-        val vtvSportNews: List<VideoBox>
+        val vtvSportNews: List<VideoBox>,
+        @SerializedName("Videos")
+        val videos: List<VideoBox>
 )
