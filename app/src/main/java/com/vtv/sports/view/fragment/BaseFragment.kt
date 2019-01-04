@@ -21,14 +21,15 @@ open abstract class BaseFragment : Fragment() {
     abstract fun initView(binding: ViewDataBinding?)
     abstract fun initData()
 
+    private lateinit var binding: ViewDataBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding: ViewDataBinding? = DataBindingUtil.inflate(inflater, getLayoutRes(), container, false)
-        initView(binding)
+        binding = DataBindingUtil.inflate(inflater, getLayoutRes(), container, false)
         return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        initView(binding)
         // Check network first
         if (NetworkUtil.isNetworkAvailable(view.context))
             initData()
