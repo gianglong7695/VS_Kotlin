@@ -25,7 +25,6 @@ class VideoItemAdapter(c: Context) : RecyclerView.Adapter<RecyclerView.ViewHolde
     private var listNews: MutableList<VideoBox> = mutableListOf()
     private var inflater: LayoutInflater = LayoutInflater.from(c)
 
-
     fun insertData(data: List<VideoBox>) {
         if (data != null) {
             val size = listNews.size
@@ -45,12 +44,12 @@ class VideoItemAdapter(c: Context) : RecyclerView.Adapter<RecyclerView.ViewHolde
         return when (viewType) {
             TYPE_SIMPLE -> {
                 var binding: ItemVideoSimpleBinding =
-                    DataBindingUtil.inflate(inflater, R.layout.item_video_simple, viewGroup, false)
+                        DataBindingUtil.inflate(inflater, R.layout.item_video_simple, viewGroup, false)
                 SimpleVH(binding)
             }
             else -> {
                 var binding: ItemNewsLoadingBinding =
-                    DataBindingUtil.inflate(inflater, R.layout.item_news_loading, viewGroup, false)
+                        DataBindingUtil.inflate(inflater, R.layout.item_news_loading, viewGroup, false)
                 LoadingVH(binding)
             }
         }
@@ -104,10 +103,10 @@ class VideoItemAdapter(c: Context) : RecyclerView.Adapter<RecyclerView.ViewHolde
 
         fun setData() {
             Glide
-                .with(binding.root.context)
-                .load(R.drawable.img_loading)
+                    .with(binding.root.context)
+                    .load(R.drawable.img_loading)
 //                .apply(RequestOptions().override(150, 100))
-                .into(binding.imgLoading)
+                    .into(binding.imgLoading)
         }
     }
 

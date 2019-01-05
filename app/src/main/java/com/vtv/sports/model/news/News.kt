@@ -50,7 +50,11 @@ data class News(
         @SerializedName("ZoneName")
         val zoneName: String,
         @SerializedName("ZoneShortURL")
-        val zoneShortURL: String
+        val zoneShortURL: String,
+        @SerializedName("CommentCount")
+        val commentCount: Int,
+        @SerializedName("ShareCount")
+        val shareCount: Int
 ) {
     var isLoading: Boolean = false
 }

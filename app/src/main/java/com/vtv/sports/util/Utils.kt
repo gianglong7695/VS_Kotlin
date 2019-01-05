@@ -40,5 +40,13 @@ class Utils {
             }, delay)
         }
 
+
+        fun getCounter(c: Long): String {
+            if (c < 1000) return c.toString()
+            val exp = (Math.log(c.toDouble()) / Math.log(1000.0)).toInt()
+            return String.format("%.1f %c", c / Math.pow(1000.0, exp.toDouble()), "kMGTPE"[exp - 1])
+        }
+
+
     }
 }

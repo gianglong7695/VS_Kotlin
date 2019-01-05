@@ -90,9 +90,6 @@ class NewsDetailFragment : BaseFragment() {
     }
 
     private fun hideRefresh() {
-//        Timer("", false).schedule(Constant.DELAY_REFRESH_DEFAULT) {
-//            binding.swipeRefresh.isRefreshing = false
-//        }
         binding.swipeRefresh.isRefreshing = false
 
     }

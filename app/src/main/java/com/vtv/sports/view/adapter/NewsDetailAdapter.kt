@@ -10,6 +10,7 @@ import com.vtv.sports.R
 import com.vtv.sports.databinding.ItemDetailHeaderBinding
 import com.vtv.sports.model.news.News
 import com.vtv.sports.util.TimeDateUtils
+import com.vtv.sports.util.Utils
 
 /**
  * Created by Giang Long on 12/24/2018.
@@ -33,11 +34,11 @@ class NewsDetailAdapter(c: Context, news: News) : RecyclerView.Adapter<RecyclerV
 //
 //        }
         var binding: ItemDetailHeaderBinding =
-            DataBindingUtil.inflate(inflater, R.layout.item_detail_header, viewGroup, false)
+                DataBindingUtil.inflate(inflater, R.layout.item_detail_header, viewGroup, false)
         return HeaderVH(binding)
     }
 
-    fun updateData(data: News){
+    fun updateData(data: News) {
         this.news = data
         notifyDataSetChanged()
     }
@@ -47,7 +48,7 @@ class NewsDetailAdapter(c: Context, news: News) : RecyclerView.Adapter<RecyclerV
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, pos: Int) {
-        if(holder is HeaderVH){
+        if (holder is HeaderVH) {
             holder.setData(news)
         }
     }
@@ -66,6 +67,9 @@ class NewsDetailAdapter(c: Context, news: News) : RecyclerView.Adapter<RecyclerV
             binding.textDate.text = TimeDateUtils.convertToDate(news.distributionDate)
             binding.textSapo.text = news.sapo
             binding.textAuthor.text = news.author
+            binding.textShareCount.text = Utils.getCounter(news.shareCount.toLong())
+//            binding.textCommentCount.text = Utils.getCounter(news.commentCount.toLong())
+            binding.textCommentCount.text = Utils.getCounter(1500)
         }
     }
 }

@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.vtv.sports.R
 import com.vtv.sports.databinding.ItemMenuBinding
 import com.vtv.sports.model.menu.MenuLeft
@@ -22,7 +23,32 @@ class MenuAdapter(c: Context, data: List<MenuLeft>) : RecyclerView.Adapter<MenuA
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, pos: Int): ViewHolder {
         var binding: ItemMenuBinding = DataBindingUtil.inflate(inflater, R.layout.item_menu, viewGroup, false)
-        return ViewHolder(binding)
+        val holder = ViewHolder(binding)
+
+        holder.itemView.setOnClickListener {
+            ToastUtil(viewGroup.context, data[holder.adapterPosition].zoneName)
+            when (data[holder.adapterPosition].zoneId) {
+                393 -> {
+
+                }
+                394 -> {
+
+                }
+                395 -> {
+
+                }
+                396 -> {
+
+                }
+                397 -> {
+
+                }
+                else -> {
+
+                }
+            }
+        }
+        return holder
     }
 
     override fun getItemCount(): Int {
@@ -35,6 +61,7 @@ class MenuAdapter(c: Context, data: List<MenuLeft>) : RecyclerView.Adapter<MenuA
 
     inner class ViewHolder(binding: ItemMenuBinding) : RecyclerView.ViewHolder(binding.root) {
         private var binding: ItemMenuBinding = binding
+
 
         fun setData(item: MenuLeft) {
             if (item.zoneName != null)
@@ -52,10 +79,6 @@ class MenuAdapter(c: Context, data: List<MenuLeft>) : RecyclerView.Adapter<MenuA
                 binding.imgIcon.setImageResource(imgRes)
             } else {
                 binding.imgIcon.setImageResource(item.imageRes)
-            }
-
-            binding.root.setOnClickListener {
-                ToastUtil(binding.root.context, item.zoneName)
             }
         }
     }

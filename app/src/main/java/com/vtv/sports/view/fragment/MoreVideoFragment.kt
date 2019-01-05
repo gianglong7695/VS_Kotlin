@@ -57,9 +57,9 @@ class MoreVideoFragment : BaseFragment() {
         }
 
         binding.swipeRefresh.setColorSchemeColors(
-            ContextCompat.getColor(context!!, R.color.red),
-            ContextCompat.getColor(context!!, R.color.green),
-            ContextCompat.getColor(context!!, R.color.blue)
+                ContextCompat.getColor(context!!, R.color.red),
+                ContextCompat.getColor(context!!, R.color.green),
+                ContextCompat.getColor(context!!, R.color.blue)
         )
         binding.swipeRefresh.setOnRefreshListener {
             if (itemAdapter != null) {

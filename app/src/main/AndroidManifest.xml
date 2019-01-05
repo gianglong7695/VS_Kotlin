@@ -14,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".view.activity.MainActivity"></activity>
+        <activity android:name=".view.activity.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustNothing"></activity>
         <activity android:name=".view.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
