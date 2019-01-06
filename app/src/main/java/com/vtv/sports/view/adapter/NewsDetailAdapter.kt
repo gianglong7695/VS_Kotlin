@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.vtv.sports.R
 import com.vtv.sports.databinding.ItemDetailHeaderBinding
+import com.vtv.sports.databinding.ItemDetailWebviewBinding
+import com.vtv.sports.databinding.ItemNewsSimpleBinding
 import com.vtv.sports.model.news.News
 import com.vtv.sports.util.TimeDateUtils
 import com.vtv.sports.util.Utils
@@ -23,6 +25,7 @@ class NewsDetailAdapter(c: Context, news: News) : RecyclerView.Adapter<RecyclerV
     private val TYPE_NEWS_ITEM = 3
     private var inflater: LayoutInflater
     private var news: News
+    private lateinit var lastestNews: List<News>
 
     init {
         this.news = news
@@ -30,20 +33,37 @@ class NewsDetailAdapter(c: Context, news: News) : RecyclerView.Adapter<RecyclerV
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-//        if(viewType == TYPE_HEADER){
-//
-//        }
-        var binding: ItemDetailHeaderBinding =
-                DataBindingUtil.inflate(inflater, R.layout.item_detail_header, viewGroup, false)
-        return HeaderVH(binding)
+        return when (viewType) {
+            TYPE_HEADER -> {
+                var binding: ItemDetailHeaderBinding =
+                    DataBindingUtil.inflate(inflater, R.layout.item_detail_header, viewGroup, false)
+                HeaderVH(binding)
+            }
+            TYPE_WEBVIEW -> {
+                var binding: ItemDetailWebviewBinding =
+                    DataBindingUtil.inflate(inflater, R.layout.item_detail_webview, viewGroup, false)
+                WebViewVH(binding)
+            }
+
+            else -> {
+                var binding: ItemNewsSimpleBinding =
+                    DataBindingUtil.inflate(inflater, R.layout.item_news_simple, viewGroup, false)
+                ItemVH(binding)
+            }
+        }
+
     }
 
-    fun updateData(data: News) {
-        this.news = data
-        notifyDataSetChanged()
+    fun updateData(data: News, lastestNews: List<News>) {
+//        this.news = data
+//        this.lastestNews = las
+//        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {
+        if (lastestNews != null) {
+            return lastestNews.size + 2
+        }
         return 1
     }
 
@@ -51,10 +71,22 @@ class NewsDetailAdapter(c: Context, news: News) : RecyclerView.Adapter<RecyclerV
         if (holder is HeaderVH) {
             holder.setData(news)
         }
+
+        if (holder is WebViewVH) {
+            holder.setData(news.url)
+        }
+
+        if (holder is ItemVH) {
+            holder.setData(news)
+        }
     }
 
     override fun getItemViewType(position: Int): Int {
-        return TYPE_HEADER
+        return when (position) {
+            0 -> TYPE_HEADER
+            1 -> TYPE_WEBVIEW
+            else -> TYPE_NEWS_ITEM
+        }
     }
 
 
@@ -70,6 +102,34 @@ class NewsDetailAdapter(c: Context, news: News) : RecyclerView.Adapter<RecyclerV
             binding.textShareCount.text = Utils.getCounter(news.shareCount.toLong())
 //            binding.textCommentCount.text = Utils.getCounter(news.commentCount.toLong())
             binding.textCommentCount.text = Utils.getCounter(1500)
+        }
+    }
+
+    class WebViewVH(binding: ItemDetailWebviewBinding) : RecyclerView.ViewHolder(binding.root) {
+        var binding: ItemDetailWebviewBinding = binding
+
+        fun setData(url: String) {
+//            Logs.e("Webview load url: http://$url")
+//            binding.webView.loadUrl("http://$url")
+        }
+    }
+
+
+    class ItemVH(binding: ItemNewsSimpleBinding) : RecyclerView.ViewHolder(binding.root) {
+        var binding: ItemNewsSimpleBinding = binding
+
+        fun setData(news: News) {
+            if (news != null) {
+                Glide.with(binding.root.context).load(news.avatar).into(binding.imgAvatar)
+                binding.textTitle.text = news.title
+                binding.textDate.text = TimeDateUtils.convertToDate(news.distributionDate)
+            }
+
+            binding.root.setOnClickListener {
+                //                val listNewsGson = Gson().toJson(listNews)
+//                val intent = NewsDetailActivity.newIntent(binding.root.context, listNewsGson, adapterPosition)
+//                binding.root.context.startActivity(intent)
+            }
         }
     }
 }

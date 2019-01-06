@@ -15,28 +15,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></WebView>
 
-        <com.google.android.flexbox.FlexboxLayout
-                android:id="@+id/flex_box"
-                android:layout_width="match_parent"
-                app:layout_constraintTop_toBottomOf="@id/web_view"
-                app:flexWrap="wrap"
-                android:layout_marginLeft="@dimen/size_10"
-                android:layout_marginRight="@dimen/size_10"
-                android:layout_height="wrap_content">
+        <!--<com.google.android.flexbox.FlexboxLayout-->
+        <!--android:id="@+id/flex_box"-->
+        <!--android:layout_width="match_parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@id/web_view"-->
+        <!--app:flexWrap="wrap"-->
+        <!--android:layout_marginLeft="@dimen/size_10"-->
+        <!--android:layout_marginRight="@dimen/size_10"-->
+        <!--android:layout_height="wrap_content">-->
 
-            <ImageView
-                    android:layout_width="@dimen/size_15"
-                    android:layout_height="@dimen/size_15"
-                    android:src="@drawable/ic_tag"/>
+        <!--<ImageView-->
+        <!--android:layout_width="@dimen/size_15"-->
+        <!--android:layout_height="@dimen/size_15"-->
+        <!--android:src="@drawable/ic_tag"/>-->
 
-        </com.google.android.flexbox.FlexboxLayout>
+        <!--</com.google.android.flexbox.FlexboxLayout>-->
 
         <View
                 android:id="@+id/view_divider"
                 android:layout_width="@dimen/size_5"
                 android:layout_height="@dimen/size_25"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/flex_box"
+                app:layout_constraintTop_toBottomOf="@id/web_view"
                 android:layout_marginTop="@dimen/size_10"
                 android:layout_marginLeft="@dimen/size_10"
                 android:background="@color/colorPrimary"/>
