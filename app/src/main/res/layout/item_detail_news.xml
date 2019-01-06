@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data></data>
+
+    <android.support.constraint.ConstraintLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:paddingBottom="@dimen/size_7"
+            android:background="?attr/selectableItemBackground"
+            android:layout_height="wrap_content">
+
+        <include layout="@layout/view_divider"/>
+
+
+        <ImageView
+                android:id="@+id/img_avatar"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:scaleType="centerCrop"
+                android:layout_marginTop="@dimen/size_7"
+                android:layout_marginLeft="@dimen/size_7"
+                android:layout_width="@dimen/size_100"
+                android:layout_height="@dimen/size_90"/>
+
+
+        <ImageView
+                android:id="@+id/img_play"
+                android:layout_width="@dimen/size_30"
+                android:layout_height="@dimen/size_30"
+                android:src="@drawable/ic_button_play"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/img_avatar"
+                app:layout_constraintLeft_toLeftOf="@id/img_avatar"
+                app:layout_constraintRight_toRightOf="@id/img_avatar"
+                app:layout_constraintTop_toTopOf="@id/img_avatar"/>
+
+        <android.support.constraint.ConstraintLayout
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="0dp"
+                android:layout_marginTop="@dimen/size_7"
+                android:layout_marginRight="@dimen/size_7"
+                android:layout_marginLeft="@dimen/size_7"
+                app:layout_constraintLeft_toRightOf="@id/img_avatar"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:id="@+id/text_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_news_header"
+                    android:textStyle="bold"
+                    android:maxLines="3"
+                    android:ellipsize="end"
+                    tools:text="ĐT Iraq gặp khó khăn lực lượng trước cuộc đấu với ĐT Việt Nam"/>
+
+            <ImageView
+                    android:layout_marginTop="@dimen/size_10"
+                    android:id="@+id/img_clock"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_title"
+                    android:layout_width="@dimen/size_15"
+                    android:layout_height="@dimen/size_15"
+                    android:src="@drawable/ic_clock"/>
+
+
+            <TextView
+                    android:id="@+id/text_date"
+                    app:layout_constraintTop_toTopOf="@id/img_clock"
+                    app:layout_constraintBottom_toBottomOf="@id/img_clock"
+                    app:layout_constraintLeft_toRightOf="@id/img_clock"
+                    android:layout_marginLeft="@dimen/size_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_12"
+                    tools:text="23/12/2018"/>
+
+        </android.support.constraint.ConstraintLayout>
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

@@ -14,14 +14,14 @@ class Logs {
         fun d(msg: String) {
             if (isDebug) {
                 var stackTraceElement: StackTraceElement = Throwable().stackTrace[1]
-                Log.d("$stackTraceElement/${stackTraceElement.lineNumber}: ", msg)
+                Log.d("Glong/${stackTraceElement.fileName}/${stackTraceElement.lineNumber}: ", msg)
             }
         }
 
         fun e(msg: String) {
             if (isDebug) {
                 var stackTraceElement: StackTraceElement = Throwable().stackTrace[1]
-                Log.e("$stackTraceElement/${stackTraceElement.lineNumber}: ", msg)
+                Log.e("Glong/${stackTraceElement.fileName}/${stackTraceElement.lineNumber}: ", msg)
             }
         }
     }
