@@ -73,7 +73,7 @@ class NewsDetailFragment : BaseFragment() {
             override fun onResponse(call: Call<DetailRespone>, response: Response<DetailRespone>) {
                 hideRefresh()
                 if (response.isSuccessful && response.body()?.news != null) {
-                    adapter.updateData(response.body()!!.news)
+                    adapter.updateData(response.body()!!.news, response.body()!!.lastestNews)
                 }
             }
 
