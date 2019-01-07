@@ -6,11 +6,13 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.vtv.sports.R
 import com.vtv.sports.databinding.ItemMenuBinding
 import com.vtv.sports.model.menu.MenuLeft
+import com.vtv.sports.util.FragmentUtil
 import com.vtv.sports.util.ToastUtil
+import com.vtv.sports.view.fragment.CategoryFragment
+import com.vtv.sports.view.listener.IFragmentCallBack
 
 /**
  * Created by Giang Long on 12/22/2018.
@@ -20,35 +22,36 @@ import com.vtv.sports.util.ToastUtil
 class MenuAdapter(c: Context, data: List<MenuLeft>) : RecyclerView.Adapter<MenuAdapter.ViewHolder>() {
     private var data: List<MenuLeft> = data
     private var inflater: LayoutInflater = LayoutInflater.from(c)
+    private val iFragmentCallBack: IFragmentCallBack = c as IFragmentCallBack
+    private var onClick: View.OnClickListener? = null
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, pos: Int): ViewHolder {
         var binding: ItemMenuBinding = DataBindingUtil.inflate(inflater, R.layout.item_menu, viewGroup, false)
         val holder = ViewHolder(binding)
 
         holder.itemView.setOnClickListener {
-            ToastUtil(viewGroup.context, data[holder.adapterPosition].zoneName)
+            if (onClick != null) onClick?.onClick(it)
+            val item = data[holder.adapterPosition]
             when (data[holder.adapterPosition].zoneId) {
-                393 -> {
-
+                393, 394, 395, 396, 397 -> {
+                    iFragmentCallBack.onAddFragment(
+                        CategoryFragment.newInstance(
+                            item.zoneId.toString(),
+                            item.zoneName
+                        ), FragmentUtil.SLIDE_RIGHT
+                    )
                 }
-                394 -> {
 
-                }
-                395 -> {
-
-                }
-                396 -> {
-
-                }
-                397 -> {
-
-                }
                 else -> {
-
+                    ToastUtil(binding.root.context, item.zoneName)
                 }
             }
         }
         return holder
+    }
+
+    fun setOnClickListener(listener: View.OnClickListener) {
+        this.onClick = listener
     }
 
     override fun getItemCount(): Int {

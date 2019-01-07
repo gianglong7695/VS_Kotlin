@@ -34,8 +34,7 @@ import retrofit2.Response
  * Des:
  */
 
-class MainActivity : AppCompatActivity(), IFragmentCallBack {
-
+class MainActivity : AppCompatActivity(), IFragmentCallBack, View.OnClickListener {
     private lateinit var binding: ActivityMainBinding
     private lateinit var drawerToggle: ActionBarDrawerToggle
     private var isDrawerInitialized = false
@@ -61,11 +60,11 @@ class MainActivity : AppCompatActivity(), IFragmentCallBack {
         setSupportActionBar(binding.layoutContent.toolbar_main)
         supportActionBar?.setHomeButtonEnabled(true)
         drawerToggle = object : ActionBarDrawerToggle(
-                this,
-                binding.drawerLayout,
-                binding.layoutContent.toolbar_main,
-                R.string.navigation_drawer_open,
-                R.string.navigation_drawer_close
+            this,
+            binding.drawerLayout,
+            binding.layoutContent.toolbar_main,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
         ) {
             override fun onDrawerOpened(view: View) {
                 super.onDrawerOpened(view)
@@ -111,7 +110,6 @@ class MainActivity : AppCompatActivity(), IFragmentCallBack {
 
         //Set current tab
         setCurrentTabDefault(Constant.TAB_DEFAULT)
-
     }
 
     private fun initDrawerMenu() {
@@ -125,7 +123,8 @@ class MainActivity : AppCompatActivity(), IFragmentCallBack {
                     // Add menu static items
                     addMenuItemStatic()
 
-                    menuAdapter = MenuAdapter(applicationContext, menuList)
+                    menuAdapter = MenuAdapter(this@MainActivity, menuList)
+                    menuAdapter!!.setOnClickListener(this@MainActivity)
                     recyclerMenu.layoutManager = Utils.getLayoutManagerVer(applicationContext)
                     recyclerMenu.adapter = menuAdapter
                     isDrawerInitialized = true
@@ -139,7 +138,6 @@ class MainActivity : AppCompatActivity(), IFragmentCallBack {
         })
 
 
-
     }
 
     fun setCurrentTabDefault(pos: Int) {
@@ -151,50 +149,56 @@ class MainActivity : AppCompatActivity(), IFragmentCallBack {
 
     fun addMenuItemStatic() {
         menuList.add(
-                0,
-                MenuLeft(
-                        Constant.MENU_ID_BREAKING_NEWS,
-                        Constant.MENU_NAME_BREAKING_NEWS,
-                        "",
-                        R.drawable.ic_breaking_news
-                )
+            0,
+            MenuLeft(
+                Constant.MENU_ID_BREAKING_NEWS,
+                Constant.MENU_NAME_BREAKING_NEWS,
+                "",
+                R.drawable.ic_breaking_news
+            )
         )
 
         menuList.add(
-                MenuLeft(
-                        Constant.MENU_ID_SAVING_NEWS,
-                        Constant.MENU_NAME_SAVING_NEWS,
-                        "",
-                        R.drawable.ic_bookmark_black_24dp
-                )
+            MenuLeft(
+                Constant.MENU_ID_SAVING_NEWS,
+                Constant.MENU_NAME_SAVING_NEWS,
+                "",
+                R.drawable.ic_bookmark_black_24dp
+            )
         )
 
         menuList.add(
-                MenuLeft(
-                        Constant.MENU_ID_CONTACT,
-                        Constant.MENU_NAME_CONTACT,
-                        "",
-                        R.drawable.ic_contact_blue_large
-                )
+            MenuLeft(
+                Constant.MENU_ID_CONTACT,
+                Constant.MENU_NAME_CONTACT,
+                "",
+                R.drawable.ic_contact_blue_large
+            )
         )
 
         menuList.add(
-                MenuLeft(
-                        Constant.MENU_ID_WEBSITE,
-                        Constant.MENU_NAME_WEBSITE,
-                        "",
-                        R.drawable.ic_arrow_forward_black_24dp
-                )
+            MenuLeft(
+                Constant.MENU_ID_WEBSITE,
+                Constant.MENU_NAME_WEBSITE,
+                "",
+                R.drawable.ic_arrow_forward_black_24dp
+            )
         )
 
         if (menuAdapter == null) {
-            menuAdapter = MenuAdapter(applicationContext, menuList)
+            menuAdapter = MenuAdapter(this@MainActivity, menuList)
+            menuAdapter!!.setOnClickListener(this@MainActivity)
             binding.layoutNavigation.recycler_menu.layoutManager = Utils.getLayoutManagerVer(applicationContext)
             binding.layoutNavigation.recycler_menu.adapter = menuAdapter
             isDrawerInitialized = true
         }
     }
 
+
+    /* Menu Click listener */
+    override fun onClick(view: View?) {
+        binding.drawerLayout.closeDrawers()
+    }
 
     override fun onBackPressed() {
         if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
@@ -207,7 +211,7 @@ class MainActivity : AppCompatActivity(), IFragmentCallBack {
     override fun onAddFragment(frm: Fragment, style: Int) {
         if (NetworkUtil.isNetworkAvailable(this)) {
             FragmentUtil.addFragment(this, R.id.frame_main, frm, true, FragmentUtil.SLIDE_RIGHT)
-        }else{
+        } else {
             ToastUtil(this, Constant.NO_CONNECT)
         }
     }

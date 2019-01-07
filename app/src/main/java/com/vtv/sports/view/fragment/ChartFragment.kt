@@ -3,12 +3,12 @@ package com.vtv.sports.view.fragment
 
 import android.databinding.ViewDataBinding
 import com.vtv.sports.R
-import com.vtv.sports.databinding.FragmentLivescoreBinding
-import com.vtv.sports.model.score.ScoreRespone
+import com.vtv.sports.databinding.FragmentChartBinding
+import com.vtv.sports.model.chart.ChartRespone
 import com.vtv.sports.repository.ApiConstant
 import com.vtv.sports.repository.BaseService
 import com.vtv.sports.util.Logs
-import com.vtv.sports.view.adapter.PagerScoreAdapter
+import com.vtv.sports.view.adapter.PagerChartAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -19,19 +19,17 @@ import retrofit2.Response
  * Des: Tab1
  */
 
-class LiveScoreFragment : BaseFragment() {
-
-    lateinit var pagerAdapter: PagerScoreAdapter
+class ChartFragment : BaseFragment() {
+    lateinit var pagerAdapter: PagerChartAdapter
     var isLoaded = false
-    lateinit var binding: FragmentLivescoreBinding
-
+    lateinit var binding: FragmentChartBinding
 
     override fun getLayoutRes(): Int {
-        return R.layout.fragment_livescore
+        return R.layout.fragment_chart
     }
 
     override fun initView(binding: ViewDataBinding?) {
-        this.binding = binding as FragmentLivescoreBinding
+        this.binding = binding as FragmentChartBinding
     }
 
     override fun initData() {
@@ -56,19 +54,19 @@ class LiveScoreFragment : BaseFragment() {
     }
 
     private fun fetchData() {
-        val call = BaseService.getService().getScore(ApiConstant.SECRET_KEY, "0")
-        call.enqueue(object : Callback<ScoreRespone> {
-            override fun onResponse(call: Call<ScoreRespone>, response: Response<ScoreRespone>) {
-                if (response.isSuccessful && response.body()?.scheduleCategory != null) {
-                    pagerAdapter = PagerScoreAdapter(fragmentManager, response.body()!!.scheduleCategory)
-                    binding.pagerScore.offscreenPageLimit = 1
-                    binding.pagerScore.adapter = pagerAdapter
-                    binding.tabLayoutScore.setupWithViewPager(binding.pagerScore)
+        val call = BaseService.getService().getChart(ApiConstant.SECRET_KEY, "0")
+        call.enqueue(object : Callback<ChartRespone> {
+            override fun onResponse(call: Call<ChartRespone>, response: Response<ChartRespone>) {
+                if (response.isSuccessful && response.body()?.standingCategory != null) {
+                    pagerAdapter = PagerChartAdapter(fragmentManager, response.body()!!.standingCategory)
+                    binding.pagerChart.offscreenPageLimit = 1
+                    binding.pagerChart.adapter = pagerAdapter
+                    binding.tabChart.setupWithViewPager(binding.pagerChart)
 
                 }
             }
 
-            override fun onFailure(call: Call<ScoreRespone>, t: Throwable) {
+            override fun onFailure(call: Call<ChartRespone>, t: Throwable) {
                 Logs.e(t.toString())
             }
         })

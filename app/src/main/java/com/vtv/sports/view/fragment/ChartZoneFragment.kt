@@ -5,15 +5,15 @@ import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import com.vtv.sports.R
-import com.vtv.sports.databinding.FragmentNewsZoneBinding
-import com.vtv.sports.model.score.Schedule
-import com.vtv.sports.model.score.ScoreRespone
+import com.vtv.sports.databinding.FragmentChartZoneBinding
+import com.vtv.sports.model.chart.ChartRespone
+import com.vtv.sports.model.chart.Standing
 import com.vtv.sports.repository.ApiConstant
 import com.vtv.sports.repository.BaseService
 import com.vtv.sports.util.Constant
 import com.vtv.sports.util.Logs
 import com.vtv.sports.util.Utils
-import com.vtv.sports.view.adapter.LiveScoreAdapter
+import com.vtv.sports.view.adapter.ChartAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,28 +23,28 @@ import retrofit2.Response
  * Skype: gianglong7695@gmail.com (id: gianglong7695_1)
  * Des:
  */
-class LiveScoreZoneFragment : BaseFragment() {
+class ChartZoneFragment : BaseFragment() {
     private var zoneId: String = ""
-    lateinit var binding: FragmentNewsZoneBinding
-    private var scoreList: List<Schedule> = listOf()
-    private lateinit var scoreAdapter: LiveScoreAdapter
+    lateinit var binding: FragmentChartZoneBinding
+    private var scoreList: List<Standing> = listOf()
+    private lateinit var scoreAdapter: ChartAdapter
 
     companion object {
-        fun newInstance(zoneId: String): LiveScoreZoneFragment {
+        fun newInstance(zoneId: String): ChartZoneFragment {
             val args = Bundle()
             args.putSerializable(Constant.KEY_ID, zoneId)
-            val fragment = LiveScoreZoneFragment()
+            val fragment = ChartZoneFragment()
             fragment.arguments = args
             return fragment
         }
     }
 
     override fun getLayoutRes(): Int {
-        return R.layout.fragment_news_zone
+        return R.layout.fragment_chart_zone
     }
 
     override fun initView(binding: ViewDataBinding?) {
-        this.binding = binding as FragmentNewsZoneBinding
+        this.binding = binding as FragmentChartZoneBinding
         binding.swipeRefresh.setColorSchemeColors(
             ContextCompat.getColor(context!!, R.color.red),
             ContextCompat.getColor(context!!, R.color.green),
@@ -53,8 +53,8 @@ class LiveScoreZoneFragment : BaseFragment() {
         binding.swipeRefresh.setOnRefreshListener { fetchData(zoneId) }
 
 
-        binding.recyclerNews.layoutManager = Utils.getLayoutManagerVer(context!!)
-        binding.recyclerNews.setHasFixedSize(true)
+        binding.recyclerChart.layoutManager = Utils.getLayoutManagerVer(context!!)
+        binding.recyclerChart.setHasFixedSize(true)
     }
 
     override fun initData() {
@@ -65,18 +65,18 @@ class LiveScoreZoneFragment : BaseFragment() {
 
     private fun fetchData(id: String) {
         showRefresh()
-        val call = BaseService.getService().getScore(ApiConstant.SECRET_KEY, id)
-        call.enqueue(object : Callback<ScoreRespone> {
-            override fun onResponse(call: Call<ScoreRespone>, response: Response<ScoreRespone>) {
+        val call = BaseService.getService().getChart(ApiConstant.SECRET_KEY, id)
+        call.enqueue(object : Callback<ChartRespone> {
+            override fun onResponse(call: Call<ChartRespone>, response: Response<ChartRespone>) {
                 hideRefresh()
-                if (response.isSuccessful && response.body()?.schedule != null) {
-                    scoreList = response.body()!!.schedule
-                    scoreAdapter = LiveScoreAdapter(context!!, scoreList)
-                    binding.recyclerNews.adapter = scoreAdapter
+                if (response.isSuccessful && response.body()?.standing != null) {
+                    scoreList = response.body()!!.standing
+                    scoreAdapter = ChartAdapter(context!!, scoreList)
+                    binding.recyclerChart.adapter = scoreAdapter
                 }
             }
 
-            override fun onFailure(call: Call<ScoreRespone>, t: Throwable) {
+            override fun onFailure(call: Call<ChartRespone>, t: Throwable) {
                 hideRefresh()
                 Logs.e(t.toString())
             }

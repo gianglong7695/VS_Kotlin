@@ -7,5 +7,5 @@ import android.app.Application
  * Skype: gianglong7695@gmail.com (id: gianglong7695_1)
  * Des:
  */
-class MyApplication: Application() {
+class SportApp: Application() {
 }

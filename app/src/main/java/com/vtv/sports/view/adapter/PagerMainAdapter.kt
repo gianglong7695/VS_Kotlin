@@ -31,7 +31,7 @@ class PagerMainAdapter(fm: FragmentManager?, context: Context) : FragmentStatePa
             0 -> VideoFragment()
             1 -> NewsFragment()
             2 -> LiveScoreFragment()
-            else -> TableFragment()
+            else -> ChartFragment()
         }
     }
 

@@ -22,6 +22,9 @@
     <color name="bg_header_video">#093664</color>
     <color name="bg_footer_video">#051e38</color>
     <color name="default_background">#f1f1f1</color>
+    <color name="bg_score_item">#283440</color>
+    <color name="text_score_date_time">#999999</color>
+    <color name="text_chart">#bbbbbb</color>
 
     <!-- Detail -->
     <color name="text_header">#222222</color>

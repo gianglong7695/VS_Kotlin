@@ -1,34 +1,32 @@
-<layout
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data></data>
 
-    <android.support.constraint.ConstraintLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context="com.vtv.sports.view.fragment.VideoFragment">
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.vtv.sports.view.fragment.VideoFragment">
 
         <!-- TODO: Update blank fragment layout -->
         <android.support.design.widget.TabLayout
-                app:layout_constraintTop_toTopOf="parent"
-                android:id="@+id/tabLayout_news"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                app:tabIndicatorColor="@color/text_tabbar_selected"
-                app:tabTextColor="@color/text_tabbar_default"
-                app:tabMode="scrollable"
-                app:tabSelectedTextColor="@color/text_tabbar_selected"
-                app:tabTextAppearance="@style/TabLayoutStyle"></android.support.design.widget.TabLayout>
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/tabLayout_news"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:tabIndicatorColor="@color/text_tabbar_selected"
+            app:tabTextColor="@color/text_tabbar_default"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="@color/text_tabbar_selected"
+            app:tabTextAppearance="@style/TabLayoutStyle"></android.support.design.widget.TabLayout>
 
         <android.support.v4.view.ViewPager
-                android:id="@+id/pager_news"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                app:layout_constraintTop_toBottomOf="@id/tabLayout_news"
-                app:layout_constraintBottom_toBottomOf="parent"></android.support.v4.view.ViewPager>
+            android:id="@+id/pager_news"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/tabLayout_news"
+            app:layout_constraintBottom_toBottomOf="parent"></android.support.v4.view.ViewPager>
 
     </android.support.constraint.ConstraintLayout>
 </layout>
