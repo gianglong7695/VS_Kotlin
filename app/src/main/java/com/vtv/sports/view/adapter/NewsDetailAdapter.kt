@@ -26,7 +26,7 @@ class NewsDetailAdapter(c: Context, news: News) : RecyclerView.Adapter<RecyclerV
     private val TYPE_NEWS_ITEM = 3
     private var inflater: LayoutInflater
     private var news: News
-    private var lastestNews: List<News> = listOf()
+    private var lastestNews: MutableList<News> = mutableListOf()
 
     init {
         this.news = news
@@ -58,8 +58,16 @@ class NewsDetailAdapter(c: Context, news: News) : RecyclerView.Adapter<RecyclerV
 
     fun updateData(data: News, lastestNews: List<News>) {
         this.news = data
-        this.lastestNews = lastestNews
+        this.lastestNews = lastestNews as MutableList<News>
         notifyDataSetChanged()
+    }
+
+    fun insertData(data: List<News>) {
+        if (data != null) {
+            val size = lastestNews.size
+            lastestNews.addAll(data)
+            notifyItemRangeChanged(size, lastestNews.size)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -113,7 +121,6 @@ class NewsDetailAdapter(c: Context, news: News) : RecyclerView.Adapter<RecyclerV
             binding.webView.loadUrl("http://$url")
         }
     }
-
 
 
     class ItemVH(binding: ItemDetailNewsBinding) : RecyclerView.ViewHolder(binding.root) {

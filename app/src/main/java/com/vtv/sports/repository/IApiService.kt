@@ -1,7 +1,9 @@
 package com.vtv.sports.repository
 
+import com.vtv.sports.model.breakingnews.BreakingRespone
 import com.vtv.sports.model.chart.ChartRespone
 import com.vtv.sports.model.detail.DetailRespone
+import com.vtv.sports.model.detail.LatestRespone
 import com.vtv.sports.model.menu.MenuRespone
 import com.vtv.sports.model.news.NewsRespone
 import com.vtv.sports.model.score.ScoreRespone
@@ -87,6 +89,21 @@ interface IApiService {
         @Field("secret_key") secretKey: String,
         @Field("id") id: String
     ): Call<ChartRespone>
+
+    @FormUrlEncoded
+    @POST("get-notify/")
+    fun getBreakingNews(
+        @Field("secret_key") secretKey: String
+    ): Call<BreakingRespone>
+
+
+    @FormUrlEncoded
+    @POST("news/lastest/paging/")
+    fun getLatestNews(
+        @Field("secret_key") secretKey: String,
+        @Field("page_index") page_index: String,
+        @Field("page_size") page_size: String
+    ): Call<LatestRespone>
 
 
 }

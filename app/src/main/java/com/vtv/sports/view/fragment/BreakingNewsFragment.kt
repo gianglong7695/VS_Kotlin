@@ -4,18 +4,18 @@ package com.vtv.sports.view.fragment
 import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
-import android.support.v7.widget.RecyclerView
+import android.view.View
 import com.vtv.sports.R
 import com.vtv.sports.databinding.FragmentCategoryBinding
 import com.vtv.sports.model.breakingnews.BreakingRespone
 import com.vtv.sports.model.news.News
-import com.vtv.sports.model.news.NewsRespone
 import com.vtv.sports.repository.ApiConstant
 import com.vtv.sports.repository.BaseService
 import com.vtv.sports.util.Constant
 import com.vtv.sports.util.Logs
 import com.vtv.sports.util.Utils
 import com.vtv.sports.view.activity.MainActivity
+import com.vtv.sports.view.adapter.BreakingAdapter
 import com.vtv.sports.view.adapter.NewsAdapter
 import kotlinx.android.synthetic.main.layout_toolbar.view.*
 import retrofit2.Call
@@ -28,22 +28,20 @@ import retrofit2.Response
  * Des:
  */
 
-class CategoryFragment : BaseFragment() {
+class BreakingNewsFragment : BaseFragment() {
 
     private var zoneId: String = ""
     lateinit var binding: FragmentCategoryBinding
     private var newsList: List<News>? = listOf()
-    private lateinit var newsAdapter: NewsAdapter
-    private var pageIndex = 2
-    private var isLoadMore = false
+    private lateinit var adapter: BreakingAdapter
     private var title = ""
 
     companion object {
-        fun newInstance(zoneId: String, title: String): CategoryFragment {
+        fun newInstance(zoneId: String, title: String): BreakingNewsFragment {
             val args = Bundle()
             args.putSerializable(Constant.KEY_ID, zoneId)
             args.putSerializable(Constant.KEY_TITLE, title)
-            val fragment = CategoryFragment()
+            val fragment = BreakingNewsFragment()
             fragment.arguments = args
             return fragment
         }
@@ -67,27 +65,13 @@ class CategoryFragment : BaseFragment() {
             ContextCompat.getColor(context!!, R.color.blue)
         )
         binding.swipeRefresh.setOnRefreshListener {
-            fetchData(zoneId)
+            fetchBreakingNews()
         }
 
-        binding.recyclerCategory.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-
-                if (!binding.recyclerCategory.canScrollVertically(1)) {
-                    if (!isLoadMore) {
-                        isLoadMore = true
-                        fetchDataWithPaging()
-                    }
-                }
-            }
-        })
-
-
+        binding.layoutBreaking.visibility = View.VISIBLE
         binding.recyclerCategory.layoutManager = Utils.getLayoutManagerVer(context!!)
-        newsAdapter = NewsAdapter(context!!)
-        newsAdapter.setHeaderEnable(false)
-        binding.recyclerCategory.adapter = newsAdapter
+        adapter = BreakingAdapter(context!!)
+        binding.recyclerCategory.adapter = adapter
     }
 
     override fun initData() {
@@ -95,52 +79,29 @@ class CategoryFragment : BaseFragment() {
         title = arguments!!.getString(Constant.KEY_TITLE)
         binding.layoutToolbar.text_title.text = title
 
-        fetchData(zoneId)
+        fetchBreakingNews()
     }
 
 
-    private fun fetchData(id: String) {
+    private fun fetchBreakingNews() {
         showRefresh()
-        val call = BaseService.getService().getNewsZone(ApiConstant.SECRET_KEY, id)
-        call.enqueue(object : Callback<NewsRespone> {
-            override fun onResponse(call: Call<NewsRespone>, response: Response<NewsRespone>) {
+        val call = BaseService.getService().getBreakingNews(ApiConstant.SECRET_KEY)
+        call.enqueue(object : Callback<BreakingRespone> {
+            override fun onResponse(call: Call<BreakingRespone>, response: Response<BreakingRespone>) {
                 hideRefresh()
-                if (response.isSuccessful && response.body()?.news != null) {
-                    newsList = response.body()!!.news
-                    newsAdapter.insertData(newsList!!)
+                if (response.isSuccessful && response.body()?.notify != null) {
+                    newsList = response.body()!!.notify
+                    adapter.insertData(newsList!!)
                 }
             }
 
-            override fun onFailure(call: Call<NewsRespone>, t: Throwable) {
+            override fun onFailure(call: Call<BreakingRespone>, t: Throwable) {
                 hideRefresh()
                 Logs.e(t.toString())
             }
         })
     }
 
-
-
-
-    private fun fetchDataWithPaging() {
-        val call = BaseService.getService().getNewsZonePaging(ApiConstant.SECRET_KEY, zoneId, pageIndex.toString())
-        call.enqueue(object : Callback<NewsRespone> {
-            override fun onResponse(call: Call<NewsRespone>, response: Response<NewsRespone>) {
-                if (response.isSuccessful && response.body()?.news != null) {
-                    if (newsAdapter != null && isLoadMore) {
-                        pageIndex++
-                        newsAdapter.insertData(response.body()!!.news)
-                    }
-                }
-
-                isLoadMore = false
-            }
-
-            override fun onFailure(call: Call<NewsRespone>, t: Throwable) {
-                Logs.e(t.toString())
-                isLoadMore = false
-            }
-        })
-    }
 
     private fun showRefresh() {
         if (!binding.swipeRefresh.isRefreshing) 5

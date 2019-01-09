@@ -29,6 +29,8 @@ class Constant {
                 R.drawable.ic_chart_selected
         )
 
+        val HOST_SPORT_VTV = "http://thethao.vtv.vn/"
+
         // Menu items
         val MENU_ID_BREAKING_NEWS = 101
         val MENU_ID_SAVING_NEWS = 102

@@ -1,7 +1,10 @@
 package com.vtv.sports.view.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.databinding.DataBindingUtil
+import android.net.Uri
+import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -9,10 +12,15 @@ import android.view.ViewGroup
 import com.vtv.sports.R
 import com.vtv.sports.databinding.ItemMenuBinding
 import com.vtv.sports.model.menu.MenuLeft
+import com.vtv.sports.util.Constant
+import com.vtv.sports.util.Constant.Companion.HOST_SPORT_VTV
 import com.vtv.sports.util.FragmentUtil
 import com.vtv.sports.util.ToastUtil
+import com.vtv.sports.view.fragment.BreakingNewsFragment
 import com.vtv.sports.view.fragment.CategoryFragment
+import com.vtv.sports.view.fragment.ContactFragment
 import com.vtv.sports.view.listener.IFragmentCallBack
+import retrofit2.http.Url
 
 /**
  * Created by Giang Long on 12/22/2018.
@@ -33,14 +41,37 @@ class MenuAdapter(c: Context, data: List<MenuLeft>) : RecyclerView.Adapter<MenuA
             if (onClick != null) onClick?.onClick(it)
             val item = data[holder.adapterPosition]
             when (data[holder.adapterPosition].zoneId) {
-                393, 394, 395, 396, 397 -> {
+                393, 394, 395, 396, 397 ->
                     iFragmentCallBack.onAddFragment(
                         CategoryFragment.newInstance(
                             item.zoneId.toString(),
                             item.zoneName
                         ), FragmentUtil.SLIDE_RIGHT
                     )
+
+
+                Constant.MENU_ID_BREAKING_NEWS ->
+                    iFragmentCallBack.onAddFragment(
+                        BreakingNewsFragment.newInstance(
+                            item.zoneId.toString(),
+                            item.zoneName
+                        ), FragmentUtil.SLIDE_RIGHT
+                    )
+
+
+                Constant.MENU_ID_CONTACT -> iFragmentCallBack.onAddFragment(
+                    ContactFragment.newInstance(
+                        item.zoneId.toString(),
+                        item.zoneName
+                    ), FragmentUtil.SLIDE_RIGHT
+                )
+
+                Constant.MENU_ID_WEBSITE -> {
+                    val intent = Intent(Intent.ACTION_VIEW)
+                    intent.data = Uri.parse(Constant.HOST_SPORT_VTV)
+                    viewGroup.context.startActivity(intent)
                 }
+
 
                 else -> {
                     ToastUtil(binding.root.context, item.zoneName)

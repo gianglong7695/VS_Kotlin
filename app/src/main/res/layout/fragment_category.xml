@@ -14,12 +14,48 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/layout_breaking"
+            app:layout_constraintTop_toBottomOf="@id/layout_toolbar"
+            android:layout_width="match_parent"
+            android:background="@color/black"
+            android:visibility="gone"
+            android:paddingLeft="@dimen/size_10"
+            android:layout_height="@dimen/size_45">
+
+            <TextView
+                android:id="@+id/text_breaking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Trang tin BREAKING NEWS"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                app:layout_constraintBottom_toTopOf="@id/text_breaking_intro"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_13"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/text_breaking_intro"
+                android:text="Hệ thống thông báo khi có tin mới"
+                android:textColor="@color/text_chart"
+                android:layout_marginTop="@dimen/size_1"
+                android:textSize="@dimen/text_size_11"
+                app:layout_constraintTop_toBottomOf="@id/text_breaking"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </android.support.constraint.ConstraintLayout>
+
+
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/swipe_refresh"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/layout_toolbar">
+            app:layout_constraintTop_toBottomOf="@id/layout_breaking">
 
 
             <android.support.v7.widget.RecyclerView
@@ -30,6 +66,7 @@
             </android.support.v7.widget.RecyclerView>
 
         </android.support.v4.widget.SwipeRefreshLayout>
+
 
     </android.support.constraint.ConstraintLayout>
 </layout>

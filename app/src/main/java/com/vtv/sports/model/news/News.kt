@@ -54,7 +54,13 @@ data class News(
         @SerializedName("CommentCount")
         val commentCount: Int,
         @SerializedName("ShareCount")
-        val shareCount: Int
+        val shareCount: Int,
+        @SerializedName("ChannelId")
+        val channelId: Int,
+        @SerializedName("PublishDate")
+        val publishDate: String,
+        @SerializedName("PushDate")
+        val pushDate: String
 ) {
     var isLoading: Boolean = false
 }

@@ -41,7 +41,7 @@ class NewsAdapter(c: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
     }
 
 
-    fun setHeaderEnable(isHeader: Boolean){
+    fun setHeaderEnable(isHeader: Boolean) {
         this.isHeaderEnable = isHeader
     }
 
@@ -63,17 +63,17 @@ class NewsAdapter(c: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
         when (viewType) {
             TYPE_HEADER -> {
                 var binding: ItemNewsHeaderBinding =
-                        DataBindingUtil.inflate(inflater, R.layout.item_news_header, viewGroup, false)
+                    DataBindingUtil.inflate(inflater, R.layout.item_news_header, viewGroup, false)
                 return HeaderVH(binding)
             }
             TYPE_SIMPLE -> {
                 var binding: ItemNewsSimpleBinding =
-                        DataBindingUtil.inflate(inflater, R.layout.item_news_simple, viewGroup, false)
+                    DataBindingUtil.inflate(inflater, R.layout.item_news_simple, viewGroup, false)
                 return SimpleVH(binding)
             }
             else -> {
                 var binding: ItemNewsLoadingBinding =
-                        DataBindingUtil.inflate(inflater, R.layout.item_news_loading, viewGroup, false)
+                    DataBindingUtil.inflate(inflater, R.layout.item_news_loading, viewGroup, false)
                 return LoadingVH(binding)
             }
         }
@@ -114,7 +114,7 @@ class NewsAdapter(c: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
                 binding.textSapo.text = news.sapo
             }
 
-            binding.root.setOnClickListener{
+            binding.root.setOnClickListener {
                 val listNewsGson = Gson().toJson(listNews)
                 val intent = NewsDetailActivity.newIntent(binding.root.context, listNewsGson, adapterPosition)
                 binding.root.context.startActivity(intent)
